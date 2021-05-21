@@ -1,0 +1,4 @@
+cliff
+tapipy
+python-dotenv
+python-slugify
