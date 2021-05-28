@@ -22,7 +22,7 @@ class VariablesList(TaccApisFormatManyUnlimited, UploadJSONTemplate):
         return parser
 
     def take_action(self, parsed_args):
-        self.init_clients(parsed_args)
+        self.load_clients(parsed_args)
         tackv = self.all_key_values(parsed_args, None)
         flat_vars = {}
         for k, v in tackv.items():

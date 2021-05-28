@@ -14,6 +14,7 @@ from .debug import *
 from .display import *
 from .gitserver import *
 from .google import *
+from .organization import *
 from .projects import *
 from .redact import auto_redact
 from .registry import *

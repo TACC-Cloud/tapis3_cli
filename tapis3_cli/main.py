@@ -24,6 +24,11 @@ class Tapis_App(App):
             deferred_help=True,
         )
 
+        # Force fit width
+        # TODO - allow this to be disabled
+        # TODO - remove the option
+        os.environ['CLIFF_FIT_WIDTH'] = '1'
+
     def clean_up(self, cmd, result, err):
         self.LOG.debug('clean_up %s', cmd.__class__.__name__)
         if err:
