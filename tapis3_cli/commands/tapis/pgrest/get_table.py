@@ -20,11 +20,11 @@ class TablesShow(AuthFormatOne, TableId):
                                                    details=True)
 
         # This is the singular form for handling ONE TapisResult
-        generic_resp = self.filter_record_dict(resp.__dict__,
-                                               parsed_args.formatter)
+        filt_resp = self.filter_record_dict(resp.__dict__,
+                                            parsed_args.formatter)
         # TODO - process columns for pretty printing if formatter == 'table'
-        headers = [k for k in generic_resp.keys()]
-        data = generic_resp.values()
+        headers = [k for k in filt_resp.keys()]
+        data = filt_resp.values()
 
         self.save_client()
         return (headers, data)

@@ -21,10 +21,10 @@ class ClientsShow(BasicFormatOne, ClientId):
             client_id=super(ClientId, self).get_identifier(parsed_args))
 
         # This is the singular form for handling ONE TapisResult
-        generic_resp = self.filter_record_dict(resp.__dict__,
-                                               parsed_args.formatter)
-        headers = [k for k in generic_resp.keys()]
-        data = generic_resp.values()
+        filt_resp = self.filter_record_dict(resp.__dict__,
+                                            parsed_args.formatter)
+        headers = [k for k in filt_resp.keys()]
+        data = filt_resp.values()
 
         self.save_client()
         return (headers, data)

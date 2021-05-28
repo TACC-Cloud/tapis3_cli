@@ -1,4 +1,4 @@
-from tapis3_cli.formatters import FormatOne, FormatMany
+from tapis3_cli.formatters import FormatNone, FormatOne, FormatMany
 from tapis3_cli.settings.config import config_directory
 from tapis3_cli import cache
 from tapipy.tapis import Tapis
@@ -6,7 +6,7 @@ from tapipy.tapis import Tapis
 __all__ = ['AuthCommon', 'AuthFormatOne', 'AuthFormatMany']
 
 
-class AuthCommon(object):
+class AuthCommon(FormatNone):
     tapis3_client = None
     tapis3_client_cache = None
 

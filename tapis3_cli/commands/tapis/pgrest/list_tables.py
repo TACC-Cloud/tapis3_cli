@@ -10,13 +10,13 @@ class TablesList(AuthFormatMany):
 
         self.load_client(parsed_args)
         resp = self.tapis3_client.pgrest.list_tables()
-        generic_resp = [
+        filt_resp = [
             self.filter_record_dict(o.__dict__, parsed_args.formatter)
             for o in resp
         ]
-        headers = [k for k in generic_resp[0].keys()]
+        headers = [k for k in filt_resp[0].keys()]
         data = []
-        for item in generic_resp:
+        for item in filt_resp:
             data.append(item.values())
         self.save_client()
         return (headers, data)
