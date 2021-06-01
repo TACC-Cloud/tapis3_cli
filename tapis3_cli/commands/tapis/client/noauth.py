@@ -1,4 +1,5 @@
 from tapis3_cli import cache
+from tapis3_cli.cache.client import TapisLocalCache
 from tapis3_cli.formatters import FormatOne, FormatMany
 
 __all__ = ['NoAuthFormatOne', 'NoAuthFormatMany']
@@ -20,12 +21,7 @@ class NoAuthFormatOne(FormatOne):
 
         This should be called at the top of take_action()
         """
-        self.tapis3_client = cache.load_client(filename=parsed_args.client)
-        # print('loaded from disk')
-        self.tapis3_client_cache = parsed_args.client
-
-    def save_client(self):
-        pass
+        self.tapis3_client = TapisLocalCache.restore(cache=parsed_args.client)
 
 
 class NoAuthFormatMany(FormatMany):
@@ -44,9 +40,4 @@ class NoAuthFormatMany(FormatMany):
 
         This should be called at the top of take_action()
         """
-        self.tapis3_client = cache.load_client(filename=parsed_args.client)
-        # print('loaded from disk')
-        self.tapis3_client_cache = parsed_args.client
-
-    def save_client(self):
-        pass
+        self.tapis3_client = TapisLocalCache.restore(cache=parsed_args.client)

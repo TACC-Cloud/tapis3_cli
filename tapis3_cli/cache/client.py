@@ -53,23 +53,23 @@ class TapisLocalCache(Tapis):
             data = json.load(cl)
         try:
             return TapisLocalCache(base_url=data['base_url'],
-                                    tenant_id=data['tenant_id'],
-                                    access_token=data['access_token'],
-                                    refresh_token=data['refresh_token'],
-                                    client_id=data['client_id'],
-                                    client_key=data['client_key'],
-                                    username=data['username'],
-                                    verify=True)
+                                   tenant_id=data['tenant_id'],
+                                   access_token=data['access_token'],
+                                   refresh_token=data['refresh_token'],
+                                   client_id=data['client_id'],
+                                   client_key=data['client_key'],
+                                   username=data['username'],
+                                   verify=True)
         except Exception:
             return TapisLocalCache(base_url=data['base_url'],
-                                    tenant_id=data['tenant_id'],
-                                    access_token=data['access_token'],
-                                    refresh_token=data['refresh_token'],
-                                    client_id=data['client_id'],
-                                    client_key=data['client_key'],
-                                    username=data['username'],
-                                    password=password,
-                                    verify=True)            
+                                   tenant_id=data['tenant_id'],
+                                   access_token=data['access_token'],
+                                   refresh_token=data['refresh_token'],
+                                   client_id=data['client_id'],
+                                   client_key=data['client_key'],
+                                   username=data['username'],
+                                   password=password,
+                                   verify=True)
 
     def refresh_user_tokens(self):
         """Refresh access and refresh tokens then save to cache

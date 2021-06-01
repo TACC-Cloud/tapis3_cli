@@ -18,5 +18,4 @@ class TablesList(AuthFormatMany):
         data = []
         for item in filt_resp:
             data.append(item.values())
-        self.save_client()
         return (headers, data)

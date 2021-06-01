@@ -23,5 +23,4 @@ class ActorsUpdate(ActorsManage):
         headers = [k for k in filt_resp.keys()]
         data = filt_resp.values()
 
-        self.save_client()
         return (tuple(headers), tuple(data))

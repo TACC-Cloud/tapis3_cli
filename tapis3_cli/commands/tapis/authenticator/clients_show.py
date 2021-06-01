@@ -25,6 +25,4 @@ class ClientsShow(BasicFormatOne, ClientId):
                                             parsed_args.formatter)
         headers = [k for k in filt_resp.keys()]
         data = filt_resp.values()
-
-        self.save_client()
         return (headers, data)

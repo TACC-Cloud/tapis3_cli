@@ -1,5 +1,6 @@
 from tapis3_cli import cache, settings
-from tapipy.tapis import Tapis
+#from tapipy.tapis import Tapis
+from tapis3_cli.cache.client import TapisLocalCache
 from tapis3_cli.utils import prompt, prompt_accept, prompt_boolean, get_hostname
 from prettytable import PrettyTable
 from ..client import NoAuthFormatOne
@@ -67,7 +68,8 @@ class AuthInit(FormatNone):
 
         # Load from client
         try:
-            cl = cache.load_client(filename=config_filename)
+            cl = TapisLocalCache.restore(cache=config_filename)
+            #            cl = cache.load_client(filename=config_filename)
             disk_client = {
                 'base_url': cl.base_url,
                 'client_id': cl.client_id,
@@ -103,7 +105,7 @@ class AuthInit(FormatNone):
         else:
             context['site_id'] = settings.TAPIS3_CLI_DEFAULT_SITE_ID
 
-        t = Tapis(base_url=api_base_url)
+        t = TapisLocalCache(base_url=api_base_url)
         if self.interactive:
             th = ['Site ID', 'URL']
             tr = [[t.site_id, t.base_url] for t in t.tenants.list_sites()]
@@ -133,7 +135,7 @@ class AuthInit(FormatNone):
         else:
             context['tenant_id'] = settings.TAPIS3_CLI_DEFAULT_TENANT_ID
 
-        t = Tapis(base_url=api_base_url)
+        t = TapisLocalCache(base_url=api_base_url)
         if self.interactive:
             th = ['Tenant ID', 'Description', 'API URL']
             tr = [[t.tenant_id, t.description, t.base_url]
@@ -185,9 +187,9 @@ class AuthInit(FormatNone):
         #
         # t is a new Tapis client - it has basic credentials so we can take
         # authenticated actions such as listing, getting, and managing clients
-        t = Tapis(base_url=context['base_url'],
-                  username=context['username'],
-                  password=context['password'])
+        t = TapisLocalCache(base_url=context['base_url'],
+                            username=context['username'],
+                            password=context['password'])
         # If credentials are wrong, this will throw
         # tapipy.errors.InvalidInputError: message: Invalid username/password combination
         t.get_tokens()
@@ -233,12 +235,12 @@ class AuthInit(FormatNone):
         # Access/refresh tokens (Do not accept from CLI)
         # t is a new Tapis client, this time configured with
         # OAuth2 client id/key allowing issuance of auth/refresh
-        t = Tapis(base_url=context['base_url'],
-                  username=context['username'],
-                  password=context['password'],
-                  client_id=context['client_id'],
-                  client_key=context['client_key'])
+        t = TapisLocalCache(base_url=context['base_url'],
+                            username=context['username'],
+                            password=context['password'],
+                            client_id=context['client_id'],
+                            client_key=context['client_key'],
+                            cache=config_filename)
         t.get_tokens()
+        # This should automatically save to disk
         t.refresh_tokens()
-        # TODO propagate -C
-        cache.save_client(t, filename=config_filename)

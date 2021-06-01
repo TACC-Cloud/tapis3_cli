@@ -1,6 +1,7 @@
 from tapis3_cli.formatters import FormatNone, FormatOne, FormatMany
 from tapis3_cli.settings.config import config_directory
 from tapis3_cli import cache
+from tapis3_cli.cache.client import TapisLocalCache
 from tapipy.tapis import Tapis
 
 __all__ = ['AuthCommon', 'AuthFormatOne', 'AuthFormatMany']
@@ -62,34 +63,21 @@ class AuthCommon(FormatNone):
         # URL and token
         if (parsed_args.base_url is not None
                 and parsed_args.access_token is not None):
-            self.tapis3_client = Tapis(base_url=parsed_args.base_url,
-                                       access_token=parsed_args.access_token)
+            self.tapis3_client = TapisLocalCache(
+                base_url=parsed_args.base_url,
+                access_token=parsed_args.access_token)
         # URL username password
         elif (parsed_args.base_url is not None
               and parsed_args.username is not None
               and parsed_args.password is not None):
-            self.tapis3_client = Tapis(base_url=parsed_args.base_url,
-                                       username=parsed_args.username,
-                                       password=parsed_args.password)
+            self.tapis3_client = TapisLocalCache(base_url=parsed_args.base_url,
+                                                 username=parsed_args.username,
+                                                 password=parsed_args.password)
         # TODO - support passing base_url and nonce
         else:
-            self.tapis3_client = cache.load_client(filename=parsed_args.client)
-            # print('loaded from disk')
-            self.tapis3_client_cache = parsed_args.client
-            # self.tapis3_client = cache.refresh_client(self.tapis3_client)
-            # # NOTE This may or may not be the thing to do here...
-            # self.tapis3_client.get_tokens()
-            # self.tapis3_client.refresh_tokens()
-            # self.save_client()
-            # TODO - save access/refresh to client.json
-
-    def save_client(self):
-        # Call this at end of take_action afetr you're done with
-        # all Tapis API calls. It will persist the current state of
-        # the client to IF it was originally loaded from disk
-        # if self.tapis3_client_cache is not None:
-        self.tapis3_client = cache.save_client(
-            self.tapis3_client, filename=self.tapis3_client_cache)
+            self.tapis3_client = TapisLocalCache.restore(
+                cache=parsed_args.client)
+            self.tapis3_client.get_tokens()
 
     def filter_record_dict(self, record, formatter='table'):
         if len(self.DISPLAY_FIELDS) == 0 or formatter != 'table':

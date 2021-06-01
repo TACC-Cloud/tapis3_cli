@@ -1,6 +1,7 @@
 from tapis3_cli.formatters import FormatOne, FormatMany
 from tapis3_cli.settings.config import config_directory
 from tapis3_cli import cache
+from tapis3_cli.cache.client import TapisLocalCache
 from tapipy.tapis import Tapis
 
 __all__ = ['BasicFormatOne', 'BasicFormatMany']
@@ -43,14 +44,10 @@ class BasicCommon(object):
 
         This should be called at the top of take_action()
         """
-        self.tapis3_client = Tapis(base_url=parsed_args.base_url,
-                                   username=parsed_args.username,
-                                   password=parsed_args.password)
-        self.tapis3_client_cache = None
+        self.tapis3_client = TapisLocalCache(base_url=parsed_args.base_url,
+                                             username=parsed_args.username,
+                                             password=parsed_args.password)
         self.tapis3_client.get_tokens()
-
-    def save_client(self):
-        pass
 
     def take_action(self, parsed_args):
         pass

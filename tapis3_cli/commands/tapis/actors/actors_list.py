@@ -24,5 +24,4 @@ class ActorsList(AuthFormatMany):
         for item in filt_resp:
             data.append(item.values())
 
-        self.save_client()
         return (tuple(headers), tuple(data))
