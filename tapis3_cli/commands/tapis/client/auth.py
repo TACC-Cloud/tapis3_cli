@@ -16,12 +16,12 @@ class AuthCommon(FormatNone):
         # base URL -H --base-url [https://tacc.tapis.io]
         # access_token -Z, --token
 
-        parser.add_argument('-C',
-                            '--client',
-                            dest='client',
-                            type=str,
-                            metavar='str',
-                            help="Tapis client config")
+        # parser.add_argument('-C',
+        #                     '--client',
+        #                     dest='client',
+        #                     type=str,
+        #                     metavar='str',
+        #                     help="Tapis client config")
 
         parser.add_argument('-H',
                             '--base-url',
@@ -76,7 +76,7 @@ class AuthCommon(FormatNone):
         # TODO - support passing base_url and nonce
         else:
             self.tapis3_client = TapisLocalCache.restore(
-                cache=parsed_args.client)
+                )
             self.tapis3_client.get_tokens()
 
     def filter_record_dict(self, record, formatter='table'):

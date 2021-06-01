@@ -8,12 +8,12 @@ __all__ = ['NoAuthFormatOne', 'NoAuthFormatMany']
 class NoAuthFormatOne(FormatOne):
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
-        parser.add_argument('-C',
-                            '--client',
-                            dest='client',
-                            type=str,
-                            metavar='str',
-                            help="Tapis client config")
+        # parser.add_argument('-C',
+        #                     '--client',
+        #                     dest='client',
+        #                     type=str,
+        #                     metavar='str',
+        #                     help="Tapis client config")
         return parser
 
     def load_client(self, parsed_args):
@@ -21,18 +21,18 @@ class NoAuthFormatOne(FormatOne):
 
         This should be called at the top of take_action()
         """
-        self.tapis3_client = TapisLocalCache.restore(cache=parsed_args.client)
+        self.tapis3_client = TapisLocalCache.restore()
 
 
 class NoAuthFormatMany(FormatMany):
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
-        parser.add_argument('-C',
-                            '--client',
-                            dest='client',
-                            type=str,
-                            metavar='str',
-                            help="Tapis client config")
+        # parser.add_argument('-C',
+        #                     '--client',
+        #                     dest='client',
+        #                     type=str,
+        #                     metavar='str',
+        #                     help="Tapis client config")
         return parser
 
     def load_client(self, parsed_args):
@@ -40,4 +40,4 @@ class NoAuthFormatMany(FormatMany):
 
         This should be called at the top of take_action()
         """
-        self.tapis3_client = TapisLocalCache.restore(cache=parsed_args.client)
+        self.tapis3_client = TapisLocalCache.restore()
