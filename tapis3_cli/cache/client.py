@@ -51,40 +51,61 @@ class TapisLocalCache(Tapis):
         cache_path = cls.path_to_cache(cache_dir, cache)
         with open(cache_path, 'r') as cl:
             data = json.load(cl)
-        try:
-            return TapisLocalCache(base_url=data['base_url'],
-                                   tenant_id=data['tenant_id'],
-                                   access_token=data['access_token'],
-                                   refresh_token=data['refresh_token'],
-                                   client_id=data['client_id'],
-                                   client_key=data['client_key'],
-                                   username=data['username'],
-                                   verify=True)
-        except Exception:
-            return TapisLocalCache(base_url=data['base_url'],
-                                   tenant_id=data['tenant_id'],
-                                   access_token=data['access_token'],
-                                   refresh_token=data['refresh_token'],
-                                   client_id=data['client_id'],
-                                   client_key=data['client_key'],
-                                   username=data['username'],
-                                   password=password,
-                                   verify=True)
+            try:
+                t = TapisLocalCache(base_url=data['base_url'],
+                                    tenant_id=data['tenant_id'],
+                                    access_token=data['access_token'],
+                                    refresh_token=data['refresh_token'],
+                                    client_id=data['client_id'],
+                                    client_key=data['client_key'],
+                                    username=data['username'],
+                                    verify=True)
+                t.get_tokens()
+                return t
+            except Exception as exc:
+                if password is not None:
+                    t = TapisLocalCache(base_url=data['base_url'],
+                                        tenant_id=data['tenant_id'],
+                                        access_token=data['access_token'],
+                                        refresh_token=data['refresh_token'],
+                                        client_id=data['client_id'],
+                                        client_key=data['client_key'],
+                                        username=data['username'],
+                                        verify=True)
+                    t.get_tokens()
+                    return t
+                else:
+                    raise
 
     def refresh_user_tokens(self):
         """Refresh access and refresh tokens then save to cache
         """
+
         resp = super().refresh_user_tokens()
+
+        # Not sure I need to do these checks if the auth flow is working 
+        if isinstance(self.access_token, str):
+            access_token = self.access_token
+            expires_at = None
+        else:
+            access_token = self.access_token.access_token
+            expires_at = self.access_token.expires_at
+        if isinstance(self.access_token, str):
+            refresh_token = self.refresh_token
+        else:
+            refresh_token = self.refresh_token.refresh_token
+
         data = {
             'base_url': self.base_url,
             'tenant_id': self.tenant_id,
             'username': self.username,
             'client_id': self.client_id,
             'client_key': self.client_key,
-            'access_token': self.access_token.access_token,
-            'refresh_token': self.refresh_token.refresh_token,
-            'expires_at': self.access_token.expires_at
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+            'expires_at': expires_at
         }
+        
         cache_dir = os.path.dirname(self.user_tokens_cache_path)
         if not os.path.isdir(cache_dir):
             os.makedirs(cache_dir, exist_ok=True)
