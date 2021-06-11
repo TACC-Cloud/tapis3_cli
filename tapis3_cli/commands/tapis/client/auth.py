@@ -94,11 +94,16 @@ class AuthCommon(FormatNone):
         return self.filter_record_dict(tapis_response.__dict__, formatter)
 
     def filter_tapis_results(self, tapis_response, formatter='table'):
-        filtered = [
-            self.filter_record_dict(o.__dict__, formatter)
-            for o in tapis_response
-        ]
-        return filtered
+        try:
+            filtered = [
+                self.filter_record_dict(o.__dict__, formatter)
+                for o in tapis_response
+            ]
+            return filtered
+        except TypeError:
+            # Tapipy can returns a single response from a limit/offset response if 
+            # number of records == 1. This wraps it into a list
+            return [self.filter_tapis_result(tapis_response, formatter)]
 
     def headers_from_result(self, tapis_data):
         if isinstance(tapis_data, list):
