@@ -76,8 +76,9 @@ class AuthCommon(FormatNone):
         # TODO - support passing base_url and nonce
         else:
             self.tapis3_client = TapisLocalCache.restore(
-                )
+                password=parsed_args.password)
             self.tapis3_client.get_tokens()
+            self.tapis3_client.refresh_tokens()
 
     def filter_record_dict(self, record, formatter='table'):
         if len(self.DISPLAY_FIELDS) == 0 or formatter != 'table':
@@ -88,6 +89,25 @@ class AuthCommon(FormatNone):
                 if k in self.DISPLAY_FIELDS:
                     new_record[k] = v
             return new_record
+
+    def filter_tapis_result(self, tapis_response, formatter='table'):
+        return self.filter_record_dict(tapis_response.__dict__, formatter)
+
+    def filter_tapis_results(self, tapis_response, formatter='table'):
+        filtered = [
+            self.filter_record_dict(o.__dict__, formatter)
+            for o in tapis_response
+        ]
+        return filtered
+
+    def headers_from_result(self, tapis_data):
+        if isinstance(tapis_data, list):
+            if len(tapis_data) > 0:
+                return [k for k in tapis_data[0].keys()]
+            else:
+                return []
+        else:
+            return [k for k in tapis_data.keys()]
 
 
 class AuthFormatOne(AuthCommon, FormatOne):

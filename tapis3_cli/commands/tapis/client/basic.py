@@ -3,6 +3,7 @@ from tapis3_cli.settings.config import config_directory
 from tapis3_cli import cache
 from tapis3_cli.cache.client import TapisLocalCache
 from tapipy.tapis import Tapis
+import warnings
 
 __all__ = ['BasicFormatOne', 'BasicFormatMany']
 
@@ -47,7 +48,11 @@ class BasicCommon(object):
         self.tapis3_client = TapisLocalCache(base_url=parsed_args.base_url,
                                              username=parsed_args.username,
                                              password=parsed_args.password)
-        self.tapis3_client.get_tokens()
+        try:
+            self.tapis3_client.get_tokens()
+            self.tapis3_client.refresh_tokens()
+        except Exception as exc:
+            warnings.warn(str(exc))
 
     def take_action(self, parsed_args):
         pass
