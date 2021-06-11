@@ -200,8 +200,8 @@ class AuthInit(FormatNone):
         elif disk_client.get('client_id', None) is not None:
             context['client_id'] = disk_client.get('client_id')
         else:
-            context['client_id'] = '{0}-{1}'.format(context['username'],
-                                                    get_hostname())
+            context['client_id'] = '{0}-{1}-{1}'.format(
+                context['tenant_id'], context['username'], get_hostname())
         if self.interactive:
             context['client_id'] = prompt('Oauth2 Client Id',
                                           default=context['client_id'],

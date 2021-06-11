@@ -7,7 +7,6 @@ import os
 __all__ = ['TapisLocalCache']
 
 DEFAULT_CACHE_FILE = 'client'
-DEFAULT_TTL = 14400
 
 
 def cache_dir():
@@ -47,43 +46,31 @@ class TapisLocalCache(Tapis):
     @classmethod
     def restore(cls, cache_dir=None, cache=None, password=None):
         """Load Tapis from a cached client
+
+        It is possible to provide a password to support the 
+        case where the refresh token is expired.
         """
         cache_path = cls.path_to_cache(cache_dir, cache)
         with open(cache_path, 'r') as cl:
             data = json.load(cl)
-            try:
-                t = TapisLocalCache(base_url=data['base_url'],
-                                    tenant_id=data['tenant_id'],
-                                    access_token=data['access_token'],
-                                    refresh_token=data['refresh_token'],
-                                    client_id=data['client_id'],
-                                    client_key=data['client_key'],
-                                    username=data['username'],
-                                    verify=True)
-                t.get_tokens()
-                return t
-            except Exception as exc:
-                if password is not None:
-                    t = TapisLocalCache(base_url=data['base_url'],
-                                        tenant_id=data['tenant_id'],
-                                        access_token=data['access_token'],
-                                        refresh_token=data['refresh_token'],
-                                        client_id=data['client_id'],
-                                        client_key=data['client_key'],
-                                        username=data['username'],
-                                        verify=True)
-                    t.get_tokens()
-                    return t
-                else:
-                    raise
+            t = TapisLocalCache(base_url=data['base_url'],
+                                tenant_id=data['tenant_id'],
+                                access_token=data['access_token'],
+                                refresh_token=data['refresh_token'],
+                                client_id=data['client_id'],
+                                client_key=data['client_key'],
+                                username=data['username'],
+                                password=password,
+                                verify=True)
+            return t
 
     def refresh_user_tokens(self):
-        """Refresh access and refresh tokens then save to cache
+        """Refresh access and refresh tokens, then save to cache
         """
 
         resp = super().refresh_user_tokens()
 
-        # Not sure I need to do these checks if the auth flow is working 
+        # Not sure I need to do these checks if the auth flow is working
         if isinstance(self.access_token, str):
             access_token = self.access_token
             expires_at = None
@@ -105,10 +92,16 @@ class TapisLocalCache(Tapis):
             'refresh_token': refresh_token,
             'expires_at': expires_at
         }
-        
-        cache_dir = os.path.dirname(self.user_tokens_cache_path)
-        if not os.path.isdir(cache_dir):
-            os.makedirs(cache_dir, exist_ok=True)
-        with open(self.user_tokens_cache_path, 'w') as cl:
-            json.dump(data, cl, cls=DateTimeEncoder, indent=4)
+
+        # Wrap in a try block in case writing fails. This supports use of
+        # TapisLocalCache inside a read-only environment such as a container
+        try:
+            cache_dir = os.path.dirname(self.user_tokens_cache_path)
+            if not os.path.isdir(cache_dir):
+                os.makedirs(cache_dir, exist_ok=True)
+            with open(self.user_tokens_cache_path, 'w') as cl:
+                json.dump(data, cl, cls=DateTimeEncoder, indent=4)
+        except Exception as exc:
+            warnings.warn('Failed to write to cache file: {0}'.format(exc))
+
         return resp
