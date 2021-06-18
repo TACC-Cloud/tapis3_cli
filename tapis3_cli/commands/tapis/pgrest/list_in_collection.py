@@ -1,8 +1,8 @@
 from ..client import AuthFormatMany
 from .mixins import TableRootUrl
 
-class TablesList(AuthFormatMany, TableRootUrl):
-    """List contents of a PgREST table
+class RowsList(AuthFormatMany, TableRootUrl):
+    """List rows in a collection
     """
     DISPLAY_FIELDS = []
 

@@ -2,8 +2,8 @@ from ..client import AuthCommon
 from .mixins import TableId
 
 
-class TablesManageDelete(AuthCommon, TableId):
-    """Delete one PgREST table
+class TablesDelete(AuthCommon, TableId):
+    """Delete a table
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']
 

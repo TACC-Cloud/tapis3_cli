@@ -1,8 +1,8 @@
 from ..client import AuthFormatMany
 
 
-class TablesManageList(AuthFormatMany):
-    """List available PgREST tables
+class TablesList(AuthFormatMany):
+    """List available tables
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id']
 
