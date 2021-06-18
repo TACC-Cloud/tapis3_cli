@@ -2,7 +2,7 @@ from ..client import AuthFormatOne
 from .mixins import TableId
 
 
-class TablesShow(AuthFormatOne, TableId):
+class TablesManageShow(AuthFormatOne, TableId):
     """Show details for one PgREST table
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']

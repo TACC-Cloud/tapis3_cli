@@ -1,7 +1,7 @@
 from ..client import AuthFormatMany
 
 
-class TablesList(AuthFormatMany):
+class TablesManageList(AuthFormatMany):
     """List available PgREST tables
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id']
@@ -9,7 +9,6 @@ class TablesList(AuthFormatMany):
     def take_action(self, parsed_args):
 
         self.load_client(parsed_args)
-
         resp = self.tapis3_client.pgrest.list_tables()
         filt_resp = self.filter_tapis_results(resp, parsed_args.formatter)
 
