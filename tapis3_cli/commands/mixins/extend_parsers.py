@@ -2,17 +2,17 @@ from .extender import ParserExtender
 
 __all__ = ['LimitsArgs']
 
-class LimitsArgs(ParserExtender):
 
+class LimitsArgs(ParserExtender):
     def extend_parser(self, parser):
         parser.add_argument('--limit',
-                    dest='limit',
-                    type=int,
-                    help='Limit to <n> records')
+                            dest='limit',
+                            type=int,
+                            help='Limit to <n> records')
         parser.add_argument('--offset',
-                    dest='offset',
-                    type=int,
-                    help='Offset by <n> records')
+                            dest='offset',
+                            type=int,
+                            help='Offset by <n> records')
         return parser
 
     def get_limit(self, parsed_args):
