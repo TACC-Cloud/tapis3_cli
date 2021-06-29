@@ -1,8 +1,8 @@
-from ..client import AuthFormatMany
+from ..client import AuthFormatOne
 from ...mixins import StringIdentifier
 
 
-class RowsShow(AuthFormatMany, StringIdentifier):
+class RowsShow(AuthFormatOne, StringIdentifier):
     """Show contents of a row in a collection
     """
     DISPLAY_FIELDS = []
@@ -27,13 +27,12 @@ class RowsShow(AuthFormatMany, StringIdentifier):
         root_url = self.get_identifier(parsed_args, 'root_url')
         pkid = self.get_identifier(parsed_args, '_pkid')
 
-        resp = self.tapis3_client.pgrest.list_in_collection(
+        resp = self.tapis3_client.pgrest.get_in_collection(
             collection=root_url, item=pkid)
-        filt_resp = self.filter_tapis_result(resp, parsed_args.formatter)
 
+        # NOTE: get_in_collection returns a list - grab first and only item
+        filt_resp = self.filter_tapis_result(resp[0], parsed_args.formatter)
         headers = self.headers_from_result(filt_resp)
-        data = []
-        for item in filt_resp:
-            data.append(item.values())
+        data = filt_resp.values()
 
         return (headers, data)
