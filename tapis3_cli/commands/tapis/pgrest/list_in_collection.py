@@ -1,23 +1,30 @@
 from ..client import AuthFormatMany
-from .mixins import TableRootUrl
+from ...mixins import StringIdentifier
+from ...mixins import LimitsArgs
 
-class RowsList(AuthFormatMany, TableRootUrl):
+
+class RowsList(AuthFormatMany, LimitsArgs, StringIdentifier):
     """List rows in a collection
     """
     DISPLAY_FIELDS = []
 
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
-        parser = super(TableRootUrl, self).extend_parser(parser)
+        parser = super().add_identifier(parser,
+                                        name='Table Root URL',
+                                        destination='root_url',
+                                        optional=False)
+        parser = LimitsArgs.extend_parser(self, parser)
         return parser
 
     def take_action(self, parsed_args):
 
         self.load_client(parsed_args)
-
-        root_url = table_id=super(
-            TableRootUrl, self).get_identifier(parsed_args)
-        resp = self.tapis3_client.pgrest.list_in_collection(collection=root_url)
+        root_url = self.get_identifier(parsed_args, 'root_url')
+        resp = self.tapis3_client.pgrest.list_in_collection(
+            collection=root_url,
+            limit=parsed_args.limit,
+            offset=parsed_args.offset)
         filt_resp = self.filter_tapis_results(resp, parsed_args.formatter)
 
         headers = self.headers_from_result(filt_resp)

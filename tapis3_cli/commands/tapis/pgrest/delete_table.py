@@ -1,19 +1,22 @@
 from ..client import AuthCommon
-from .mixins import TableId
+from ...mixins import StringIdentifier
 
 
-class TablesDelete(AuthCommon, TableId):
+class TablesDelete(AuthCommon, StringIdentifier):
     """Delete a table
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']
 
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
-        parser = super(TableId, self).extend_parser(parser)
+        parser = super().add_identifier(parser,
+                                        name='Table ID',
+                                        destination='table_id',
+                                        optional=False)
         return parser
 
     def take_action(self, parsed_args):
         self.load_client(parsed_args)
-        resp = self.tapis3_client.pgrest.delete_table(table_id=super(
-            TableId, self).get_identifier(parsed_args))
-        print(resp.message)
+        table_id = self.get_identifier(parsed_args, 'table_id')
+        resp = self.tapis3_client.pgrest.delete_table(table_id=table_id)
+        print(resp.get('message', None))
