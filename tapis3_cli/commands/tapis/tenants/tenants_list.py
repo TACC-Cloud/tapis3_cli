@@ -1,5 +1,5 @@
 from tapipy.tapis import Tapis
-from ..client import AuthFormatMany
+from ..client import Oauth2FormatMany
 from ...mixins import StringIdentifier
 
 
@@ -7,7 +7,7 @@ class TenantIdentifier(StringIdentifier):
     pass
 
 
-class TenantsList(AuthFormatMany):
+class TenantsList(Oauth2FormatMany):
     """List available Tapis tenants
     """
     DISPLAY_FIELDS = ['site_id', 'tenant_id', 'owner', 'description']

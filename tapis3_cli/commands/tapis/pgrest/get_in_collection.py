@@ -1,8 +1,8 @@
-from ..client import AuthFormatOne
+from ..client import Oauth2FormatOne
 from ...mixins import StringIdentifier
 
 
-class RowsShow(AuthFormatOne, StringIdentifier):
+class RowsShow(Oauth2FormatOne, StringIdentifier):
     """Show contents of a row in a collection
     """
     DISPLAY_FIELDS = []
@@ -27,8 +27,8 @@ class RowsShow(AuthFormatOne, StringIdentifier):
         root_url = self.get_identifier(parsed_args, 'root_url')
         pkid = self.get_identifier(parsed_args, '_pkid')
 
-        resp = self.tapis3_client.pgrest.get_in_collection(
-            collection=root_url, item=pkid)
+        resp = self.tapis3_client.pgrest.get_in_collection(collection=root_url,
+                                                           item=pkid)
 
         # NOTE: get_in_collection returns a list - grab first and only item
         filt_resp = self.filter_tapis_result(resp[0], parsed_args.formatter)

@@ -1,7 +1,7 @@
-from ..client import AuthFormatMany
+from ..client import Oauth2FormatMany
 
 
-class TablesList(AuthFormatMany):
+class TablesList(Oauth2FormatMany):
     """List available tables
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id']

@@ -1,9 +1,9 @@
-from ..client import AuthFormatMany
+from ..client import Oauth2FormatMany
 from ...mixins import StringIdentifier
 from ...mixins import LimitsArgs
 
 
-class RowsList(AuthFormatMany, LimitsArgs, StringIdentifier):
+class RowsList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
     """List rows in a collection
     """
     DISPLAY_FIELDS = []

@@ -1,8 +1,8 @@
-from ..client import AuthFormatOne
+from ..client import Oauth2FormatOne
 from ...mixins import StringIdentifier
 
 
-class TablesShow(AuthFormatOne, StringIdentifier):
+class TablesShow(Oauth2FormatOne, StringIdentifier):
     """Show details for a table
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']

@@ -1,8 +1,8 @@
-from ..client import AuthCommon
+from ..client import Oauth2Common
 from ...mixins import StringIdentifier
 
 
-class TablesDelete(AuthCommon, StringIdentifier):
+class TablesDelete(Oauth2Common, StringIdentifier):
     """Delete a table
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']

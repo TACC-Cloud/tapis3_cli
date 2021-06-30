@@ -1,8 +1,8 @@
-from ..client import BasicFormatOne
+from ..client import BasicAuthFormatOne
 from .mixins import ClientId
 
 
-class ClientsDelete(BasicFormatOne, ClientId):
+class ClientsDelete(BasicAuthFormatOne, ClientId):
     """Delete an Oauth2 client
     """
     DISPLAY_FIELDS = [

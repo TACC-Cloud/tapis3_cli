@@ -2,13 +2,13 @@ import json
 
 from tapis3_cli.utils import nrlist, split_string
 
-from ...client import AuthFormatOne
+from ...client import Oauth2FormatOne
 from ....mixins import StringIdentifier
 
 __all__ = ['ActorsManage']
 
 
-class ActorsManage(AuthFormatOne, StringIdentifier):
+class ActorsManage(Oauth2FormatOne, StringIdentifier):
     """Base class for managing an Actor
     """
 

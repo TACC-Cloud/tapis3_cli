@@ -1,10 +1,10 @@
-from ..client import AuthCommon
+from ..client import Oauth2Common
 from ...mixins import StringIdentifier
 
 __all__ = ['RowsDelete']
 
 
-class RowsDelete(AuthCommon, StringIdentifier):
+class RowsDelete(Oauth2Common, StringIdentifier):
     """Delete a row from a collection
     """
     DISPLAY_FIELDS = []

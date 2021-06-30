@@ -4,12 +4,12 @@ from tapis3_cli import cache
 from tapis3_cli.cache.client import TapisLocalCache
 from tapipy.tapis import Tapis
 import warnings
+from .filter import TapisResultsDisplay
 
-__all__ = ['BasicFormatOne', 'BasicFormatMany']
+__all__ = ['BasicAuthFormatOne', 'BasicAuthFormatMany', 'BasicAuthCommon']
 
 
-class BasicCommon(object):
-    DISPLAY_FIELDS = []
+class BasicAuthCommon(TapisResultsDisplay):
 
     tapis3_client = None
     tapis3_client_cache = None
@@ -57,20 +57,20 @@ class BasicCommon(object):
     def take_action(self, parsed_args):
         pass
 
-    def filter_record_dict(self, record, formatter='table'):
-        if len(self.DISPLAY_FIELDS) == 0 or formatter != 'table':
-            return record
-        else:
-            new_record = {}
-            for k, v in record.items():
-                if k in self.DISPLAY_FIELDS:
-                    new_record[k] = v
-            return new_record
+    # def filter_record_dict(self, record, formatter='table'):
+    #     if len(self.DISPLAY_FIELDS) == 0 or formatter != 'table':
+    #         return record
+    #     else:
+    #         new_record = {}
+    #         for k, v in record.items():
+    #             if k in self.DISPLAY_FIELDS:
+    #                 new_record[k] = v
+    #         return new_record
 
 
-class BasicFormatOne(BasicCommon, FormatOne):
+class BasicAuthFormatOne(BasicAuthCommon, FormatOne):
     pass
 
 
-class BasicFormatMany(BasicCommon, FormatMany):
+class BasicAuthFormatMany(BasicAuthCommon, FormatMany):
     pass

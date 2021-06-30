@@ -1,8 +1,8 @@
 from tapipy.tapis import Tapis
-from ..client import AuthFormatMany
+from ..client import Oauth2FormatMany
 
 
-class SitesList(AuthFormatMany):
+class SitesList(Oauth2FormatMany):
     """List available Tapis sites
     """
     DISPLAY_FIELDS = ['site_id', 'primary', 'base_url']

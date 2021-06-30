@@ -3,11 +3,12 @@ from tapis3_cli.settings.config import config_directory
 from tapis3_cli import cache
 from tapis3_cli.cache.client import TapisLocalCache
 from tapipy.tapis import Tapis
+from .filter import TapisResultsDisplay
 
-__all__ = ['AuthCommon', 'AuthFormatOne', 'AuthFormatMany']
+__all__ = ['Oauth2Common', 'Oauth2FormatOne', 'Oauth2FormatMany']
 
 
-class AuthCommon(FormatNone):
+class Oauth2Common(FormatNone, TapisResultsDisplay):
 
     DISPLAY_FIELDS = []
 
@@ -82,44 +83,44 @@ class AuthCommon(FormatNone):
                 cache=parsed_args.client)
             self.tapis3_client.get_tokens()
 
-    def filter_record_dict(self, record, formatter='table'):
-        if len(self.DISPLAY_FIELDS) == 0 or formatter != 'table':
-            return record
-        else:
-            new_record = {}
-            for k, v in record.items():
-                if k in self.DISPLAY_FIELDS:
-                    new_record[k] = v
-            return new_record
+    # def filter_record_dict(self, record, formatter='table'):
+    #     if len(self.DISPLAY_FIELDS) == 0 or formatter != 'table':
+    #         return record
+    #     else:
+    #         new_record = {}
+    #         for k, v in record.items():
+    #             if k in self.DISPLAY_FIELDS:
+    #                 new_record[k] = v
+    #         return new_record
 
-    def filter_tapis_result(self, tapis_response, formatter='table'):
-        return self.filter_record_dict(tapis_response.__dict__, formatter)
+    # def filter_tapis_result(self, tapis_response, formatter='table'):
+    #     return self.filter_record_dict(tapis_response.__dict__, formatter)
 
-    def filter_tapis_results(self, tapis_response, formatter='table'):
-        try:
-            filtered = [
-                self.filter_record_dict(o.__dict__, formatter)
-                for o in tapis_response
-            ]
-            return filtered
-        except TypeError:
-            # Tapipy can returns a single response from a limit/offset response if
-            # number of records == 1. This wraps it into a list
-            return [self.filter_tapis_result(tapis_response, formatter)]
+    # def filter_tapis_results(self, tapis_response, formatter='table'):
+    #     try:
+    #         filtered = [
+    #             self.filter_record_dict(o.__dict__, formatter)
+    #             for o in tapis_response
+    #         ]
+    #         return filtered
+    #     except TypeError:
+    #         # Tapipy can returns a single response from a limit/offset response if
+    #         # number of records == 1. This wraps it into a list
+    #         return [self.filter_tapis_result(tapis_response, formatter)]
 
-    def headers_from_result(self, tapis_data):
-        if isinstance(tapis_data, list):
-            if len(tapis_data) > 0:
-                return [k for k in tapis_data[0].keys()]
-            else:
-                return []
-        else:
-            return [k for k in tapis_data.keys()]
+    # def headers_from_result(self, tapis_data):
+    #     if isinstance(tapis_data, list):
+    #         if len(tapis_data) > 0:
+    #             return [k for k in tapis_data[0].keys()]
+    #         else:
+    #             return []
+    #     else:
+    #         return [k for k in tapis_data.keys()]
 
 
-class AuthFormatOne(AuthCommon, FormatOne):
+class Oauth2FormatOne(Oauth2Common, FormatOne):
     pass
 
 
-class AuthFormatMany(AuthCommon, FormatMany):
+class Oauth2FormatMany(Oauth2Common, FormatMany):
     pass

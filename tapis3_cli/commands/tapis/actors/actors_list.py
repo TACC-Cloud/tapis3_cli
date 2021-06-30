@@ -1,8 +1,8 @@
-from ..client import AuthFormatMany
+from ..client import Oauth2FormatMany
 from ...mixins import LimitsArgs
 
 
-class ActorsList(AuthFormatMany, LimitsArgs):
+class ActorsList(Oauth2FormatMany, LimitsArgs):
     """List available Actors
     """
     DISPLAY_FIELDS = [

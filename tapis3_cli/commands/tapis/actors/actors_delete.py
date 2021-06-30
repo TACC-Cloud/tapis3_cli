@@ -1,10 +1,10 @@
-from ..client import AuthCommon
+from ..client import Oauth2Common
 from ...mixins import StringIdentifier
 
 __all__ = ['ActorsDelete']
 
 
-class ActorsDelete(AuthCommon, StringIdentifier):
+class ActorsDelete(Oauth2Common, StringIdentifier):
     """Delete an Actor
     """
     def get_parser(self, prog_name):

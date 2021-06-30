@@ -1,8 +1,8 @@
-from ..client import BasicFormatOne
+from ..client import BasicAuthFormatOne
 from .mixins import ClientId
 
 
-class ClientsShow(BasicFormatOne, ClientId):
+class ClientsShow(BasicAuthFormatOne, ClientId):
     """Show details for one Oauth2 client
     """
     DISPLAY_FIELDS = [

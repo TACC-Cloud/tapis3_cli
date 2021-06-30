@@ -1,7 +1,7 @@
-from ..client import BasicFormatMany
+from ..client import BasicAuthFormatMany
 
 
-class ClientsList(BasicFormatMany):
+class ClientsList(BasicAuthFormatMany):
     """List available Oauth2 clients
     """
     DISPLAY_FIELDS = [
