@@ -1,6 +1,7 @@
 from ..client import AuthFormatMany
 from ...mixins import LimitsArgs
 
+
 class ActorsList(AuthFormatMany, LimitsArgs):
     """List available Actors
     """
@@ -16,7 +17,7 @@ class ActorsList(AuthFormatMany, LimitsArgs):
     def take_action(self, parsed_args):
         # TapisResult
         self.load_client(parsed_args)
-        
+
         cmdargs = {}
         if self.get_limit(parsed_args) is not None:
             cmdargs['limit'] = self.get_limit(parsed_args)

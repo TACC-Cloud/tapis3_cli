@@ -3,12 +3,12 @@ import json
 from tapis3_cli.utils import nrlist, split_string
 
 from ...client import AuthFormatOne
-from ..mixins import ActorId
+from ....mixins import StringIdentifier
 
 __all__ = ['ActorsManage']
 
 
-class ActorsManage(AuthFormatOne, ActorId):
+class ActorsManage(AuthFormatOne, StringIdentifier):
     """Base class for managing an Actor
     """
 
@@ -23,8 +23,11 @@ class ActorsManage(AuthFormatOne, ActorId):
     def extend_parser(self, parser):
 
         # Only accept actorId on update
-        if self.CREATE_ONLY is False:
-            parser = super(ActorId, self).extend_parser(parser)
+        if not self.CREATE_ONLY:
+            parser = super().add_identifier(parser,
+                                            name='Actor ID',
+                                            destination='actor_id',
+                                            optional=False)
 
         parser.add_argument('--repo',
                             dest='actor_repo',
