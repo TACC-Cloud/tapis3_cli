@@ -8,6 +8,9 @@ __all__ = ['AuthCommon', 'AuthFormatOne', 'AuthFormatMany']
 
 
 class AuthCommon(FormatNone):
+
+    DISPLAY_FIELDS = []
+
     tapis3_client = None
     tapis3_client_cache = None
 
@@ -16,12 +19,12 @@ class AuthCommon(FormatNone):
         # base URL -H --base-url [https://tacc.tapis.io]
         # access_token -Z, --token
 
-        # parser.add_argument('-C',
-        #                     '--client',
-        #                     dest='client',
-        #                     type=str,
-        #                     metavar='str',
-        #                     help="Tapis client config")
+        parser.add_argument('-C',
+                            '--client',
+                            dest='client',
+                            type=str,
+                            metavar='str',
+                            help="Tapis client config")
 
         parser.add_argument('-H',
                             '--base-url',
@@ -76,9 +79,8 @@ class AuthCommon(FormatNone):
         # TODO - support passing base_url and nonce
         else:
             self.tapis3_client = TapisLocalCache.restore(
-                password=parsed_args.password)
+                cache=parsed_args.client)
             self.tapis3_client.get_tokens()
-            self.tapis3_client.refresh_tokens()
 
     def filter_record_dict(self, record, formatter='table'):
         if len(self.DISPLAY_FIELDS) == 0 or formatter != 'table':
@@ -101,7 +103,7 @@ class AuthCommon(FormatNone):
             ]
             return filtered
         except TypeError:
-            # Tapipy can returns a single response from a limit/offset response if 
+            # Tapipy can returns a single response from a limit/offset response if
             # number of records == 1. This wraps it into a list
             return [self.filter_tapis_result(tapis_response, formatter)]
 

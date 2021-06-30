@@ -1,32 +1,17 @@
-from genericpath import exists
-from tapipy.tapis import Tapis
 import datetime
 import json
 import os
 
+from tapipy.tapis import Tapis
+
 __all__ = ['TapisLocalCache']
 
-DEFAULT_CACHE_FILE = 'client'
-
-
-def cache_dir():
-    os.environ.get('TAPIS3_CACHE_DIR', os.path.expanduser('~/.tapis3'))
-
-
-def cache_path(filename=None):
-    if filename is None:
-        filename = DEFAULT_CACHE_FILE
-    return os.path.join(cache_dir(), filename)
-
-
-class DateTimeEncoder(json.JSONEncoder):
-    #Override the default method
-    def default(self, obj):
-        if isinstance(obj, (datetime.date, datetime.datetime)):
-            return obj.isoformat()
+DEFAULT_CACHE_FILE = 'client.json'
 
 
 class TapisLocalCache(Tapis):
+    """A client for the Tapis API that caches client and token in a local file
+    """
     def __init__(self, cache_dir=None, cache=None, **kwargs):
         setattr(self, 'user_tokens_cache_path',
                 self.path_to_cache(cache_dir, cache))
@@ -44,11 +29,8 @@ class TapisLocalCache(Tapis):
         return os.path.join(cache_dir, cache)
 
     @classmethod
-    def restore(cls, cache_dir=None, cache=None, password=None):
-        """Load Tapis from a cached client
-
-        It is possible to provide a password to support the 
-        case where the refresh token is expired.
+    def restore(cls, cache_dir=None, cache=None):
+        """Load Tapis client from cached credentials
         """
         cache_path = cls.path_to_cache(cache_dir, cache)
         with open(cache_path, 'r') as cl:
@@ -59,18 +41,21 @@ class TapisLocalCache(Tapis):
                                 refresh_token=data['refresh_token'],
                                 client_id=data['client_id'],
                                 client_key=data['client_key'],
-                                username=data['username'],
-                                password=password,
                                 verify=True)
             return t
 
     def refresh_user_tokens(self):
         """Refresh access and refresh tokens, then save to cache
         """
+        class DateTimeEncoder(json.JSONEncoder):
+            #Override the default method
+            def default(self, obj):
+                if isinstance(obj, (datetime.date, datetime.datetime)):
+                    return obj.isoformat()
 
         resp = super().refresh_user_tokens()
 
-        # Not sure I need to do these checks if the auth flow is working
+        # Not sure we need to do these checks...
         if isinstance(self.access_token, str):
             access_token = self.access_token
             expires_at = None
@@ -85,11 +70,13 @@ class TapisLocalCache(Tapis):
         data = {
             'base_url': self.base_url,
             'tenant_id': self.tenant_id,
-            'username': self.username,
             'client_id': self.client_id,
             'client_key': self.client_key,
             'access_token': access_token,
             'refresh_token': refresh_token,
+        # The expires_at key is not used by Tapis but is here
+        # as a debug aid so one can quickly tell when a token
+        # pair is _expected_ to expire
             'expires_at': expires_at
         }
 
