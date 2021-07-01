@@ -5,10 +5,10 @@ import warnings
 
 from dotenv import find_dotenv, load_dotenv
 
-__all__ = ['find_config', 'load_config']
+__all__ = ['find_config', 'load_config', 'TAPIS3_CLI_CONFIG_DIR']
 
 TAPIS3_CLI_CONFIG_DIRNAME = '.tapis3'
-TAPIS3_CLI_CONFIG_FILE = os.environ.get('TAPIS3_CLI_CONFIG_FILE', 'cli')
+TAPIS3_CLI_CONFIG_FILE = os.environ.get('TAPIS3_CLI_CONFIG_FILE', 'config')
 TAPIS3_CLI_CONFIG_DIR = os.environ.get(
     'TAPIS3_CLI_CONFIG_DIR',
     os.path.join(os.path.expanduser('~'), TAPIS3_CLI_CONFIG_DIRNAME))

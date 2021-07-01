@@ -1,5 +1,6 @@
 from tapis3_cli.formatters import FormatNone, FormatOne, FormatMany
 from tapis3_cli.settings.config import config_directory
+from tapis3_cli.settings.auth import TAPIS3_CLI_CLIENT_FILE
 from tapis3_cli import cache
 from tapis3_cli.cache.client import TapisLocalCache
 from tapipy.tapis import Tapis
@@ -23,6 +24,7 @@ class Oauth2Common(FormatNone, TapisResultsDisplay):
         parser.add_argument('-C',
                             '--client',
                             dest='client',
+                            default=TAPIS3_CLI_CLIENT_FILE,
                             type=str,
                             metavar='str',
                             help="Tapis client config")
