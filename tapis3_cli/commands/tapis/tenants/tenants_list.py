@@ -20,8 +20,7 @@ class TenantsList(Oauth2FormatMany):
         self.load_client(parsed_args)
         resp = self.tapis3_client.tenants.list_tenants()
         filt_resp = [
-            self.filter_record_dict(o.__dict__, parsed_args.formatter)
-            for o in resp
+            self.filter_record_dict(o.__dict__, parsed_args) for o in resp
         ]
         headers = [k for k in filt_resp[0].keys()]
         data = []

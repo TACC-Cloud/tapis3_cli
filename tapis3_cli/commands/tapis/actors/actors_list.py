@@ -27,7 +27,7 @@ class ActorsList(Oauth2FormatMany, LimitsArgs):
         # TODO - add support for limit and offset
         # https://github.com/tapis-project/tapipy/blob/a62c5e9bece9e829919b1f2d0f56f25334dcc0f1/tapipy/resources/openapi_v3-actors.yml#L42
         resp = self.tapis3_client.actors.listActors(**cmdargs)
-        filt_resp = self.filter_tapis_results(resp, parsed_args.formatter)
+        filt_resp = self.filter_tapis_results(resp, parsed_args)
 
         headers = self.headers_from_result(filt_resp)
 

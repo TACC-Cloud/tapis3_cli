@@ -21,8 +21,7 @@ class ClientsShow(BasicAuthFormatOne, ClientId):
             client_id=super(ClientId, self).get_identifier(parsed_args))
 
         # This is the singular form for handling ONE TapisResult
-        filt_resp = self.filter_record_dict(resp.__dict__,
-                                            parsed_args.formatter)
+        filt_resp = self.filter_record_dict(resp.__dict__, parsed_args)
         headers = [k for k in filt_resp.keys()]
         data = filt_resp.values()
         return (headers, data)
