@@ -10,7 +10,7 @@ class RowsShow(Oauth2FormatOne, StringIdentifier):
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
         parser = super().add_identifier(parser,
-                                        name='Table Root URL',
+                                        name='Table root URL',
                                         destination='root_url',
                                         optional=False)
         parser = super().add_identifier(parser,

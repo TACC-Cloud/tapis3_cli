@@ -11,7 +11,7 @@ class RowsList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
         parser = super().add_identifier(parser,
-                                        name='Table Root URL',
+                                        name='Table root URL',
                                         destination='root_url',
                                         optional=False)
         parser = LimitsArgs.extend_parser(self, parser)

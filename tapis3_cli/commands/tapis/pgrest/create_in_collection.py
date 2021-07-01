@@ -5,18 +5,18 @@ __all__ = ['RowsCreate']
 
 
 class RowsCreate(Oauth2FormatOne, JSONArg, StringIdentifier):
-    """Create a new row in a collection
+    """Create a row in a collection
     """
     DISPLAY_FIELDS = []
 
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
         parser = super().add_identifier(parser,
-                                        name='Table Root URL',
+                                        name='Table root URL',
                                         destination='root_url',
                                         optional=False)
         parser = super().add_file_arg(parser,
-                                      name='New record data (JSON)',
+                                      name='New row data (JSON)',
                                       metavar='FILE/STDIN',
                                       destination='json_arg')
 
