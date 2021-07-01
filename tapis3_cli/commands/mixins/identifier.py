@@ -16,6 +16,8 @@ class StringIdentifier(ParserExtender):
 
         if metavar is None:
             arg_display = dest.upper()
+        else:
+            arg_display = metavar
 
         if optional:
             nargs = '?'
