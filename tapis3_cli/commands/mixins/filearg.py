@@ -24,12 +24,11 @@ class FileArg(ParserExtender):
         else:
             arg_display = metavar
 
+        arg_help = '{0}'.format(name)
         if optional:
             nargs = '?'
-            arg_help = 'Optional {0}'.format(name)
         else:
             nargs = None
-            arg_help = '{0}'.format(name)
 
         parser.add_argument('-F',
                             default=sys.stdin,
@@ -72,12 +71,12 @@ class JSONArg(ParserExtender):
         else:
             arg_display = metavar
 
+        arg_help = '{0}'.format(name)
         if optional:
             nargs = '?'
-            arg_help = 'Optional {0}'.format(name)
         else:
             nargs = None
-            arg_help = '{0}'.format(name)
+
 
         parser.add_argument('-F',
                             default=sys.stdin,
