@@ -12,18 +12,24 @@ class SettingsUnset(FormatOne, SettingName):
     """
     def get_parser(self, prog_name):
         parser = super(SettingsUnset, self).get_parser(prog_name)
-        parser = SettingName.extend_parser(self, parser)
+        parser = super().add_identifier(parser,
+                                        name='Setting Name',
+                                        metavar='SETTING',
+                                        destination='setting_name',
+                                        optional=False)
         return parser
 
     def take_action(self, parsed_args):
-        super(SettingsUnset, self).take_action(parsed_args)
-        self.validate_identifier(parsed_args.identifier, allow_private=False)
+        setting_name = self.get_identifier(parsed_args, 'setting_name')
+        self.validate_identifier(setting_name, allow_private=True)
+
         env_file = settings.config.find_config()
-        setting_name = parsed_args.identifier
         unset_key(env_file, setting_name)
+
         headers = [setting_name]
         records = [
-            'Run "tapis settings get {0}" to see current value'.format(
+            'Run "tapis3 config get {0}" to see current value'.format(
                 setting_name)
         ]
+
         return (tuple(headers), tuple(records))

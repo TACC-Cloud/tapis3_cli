@@ -27,18 +27,23 @@ class SettingsSet(FormatOne, SettingName):
     """
     def get_parser(self, prog_name):
         parser = super(SettingsSet, self).get_parser(prog_name)
-        parser = SettingName.extend_parser(self, parser)
+        parser = super().add_identifier(parser,
+                                        name='Setting Name',
+                                        metavar='SETTING',
+                                        destination='setting_name',
+                                        optional=False)
         parser.add_argument('settings_value',
                             metavar='VALUE',
                             help='New value for setting')
         return parser
 
     def take_action(self, parsed_args):
-        super(SettingsSet, self).take_action(parsed_args)
-        self.validate_identifier(parsed_args.identifier, allow_private=False)
-        setting_name = parsed_args.identifier
+        setting_name = self.get_identifier(parsed_args, 'setting_name')
         setting_value = parsed_args.settings_value
+        self.validate_identifier(setting_name, allow_private=True)
+
         settings_set(setting_name, setting_value)
         headers = [setting_name]
         records = [setting_value]
+
         return (tuple(headers), tuple(records))

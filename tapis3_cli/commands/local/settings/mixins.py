@@ -12,18 +12,8 @@ class UnknownSetting(InvalidIdentifier):
 
 
 class SettingName(StringIdentifier):
-    @classmethod
-    def arg_display(cls, id_value):
-        return 'SETTING_NAME'
-
-    @classmethod
-    def arg_metavar(cls, id_value):
-        return cls.arg_display(id_value)
-
-    @classmethod
-    def arg_help(cls, id_value):
-        return 'Tapis setting name'
-
+    """Adds validation of the identifier as a CLI setting
+    """
     def validate_identifier(self,
                             identifier,
                             allow_private=False,
