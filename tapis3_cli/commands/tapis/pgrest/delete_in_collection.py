@@ -29,4 +29,4 @@ class RowsDelete(Oauth2Common, StringIdentifier):
 
         resp = self.tapis3_client.pgrest.delete_in_collection(
             collection=root_url, item=pkid)
-        print(resp.message)
+        print(resp.get('message', None))

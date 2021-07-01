@@ -22,7 +22,7 @@ class TablesShow(Oauth2FormatOne, StringIdentifier):
         resp = self.tapis3_client.pgrest.get_table(table_id=table_id,
                                                    details=True)
 
-        filt_resp = self.filter_tapis_result(resp, parsed_args.formatter)
+        filt_resp = self.filter_tapis_result(resp, parsed_args)
         headers = self.headers_from_result(filt_resp)
         data = filt_resp.values()
 

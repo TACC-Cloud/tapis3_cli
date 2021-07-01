@@ -25,7 +25,7 @@ class RowsList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
             collection=root_url,
             limit=parsed_args.limit,
             offset=parsed_args.offset)
-        filt_resp = self.filter_tapis_results(resp, parsed_args.formatter)
+        filt_resp = self.filter_tapis_results(resp, parsed_args)
 
         headers = self.headers_from_result(filt_resp)
         data = []

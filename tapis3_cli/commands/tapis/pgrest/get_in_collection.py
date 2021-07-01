@@ -31,7 +31,7 @@ class RowsShow(Oauth2FormatOne, StringIdentifier):
                                                            item=pkid)
 
         # NOTE: get_in_collection returns a list - grab first and only item
-        filt_resp = self.filter_tapis_result(resp[0], parsed_args.formatter)
+        filt_resp = self.filter_tapis_result(resp[0], parsed_args)
         headers = self.headers_from_result(filt_resp)
         data = filt_resp.values()
 

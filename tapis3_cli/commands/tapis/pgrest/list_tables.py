@@ -10,7 +10,7 @@ class TablesList(Oauth2FormatMany):
 
         self.load_client(parsed_args)
         resp = self.tapis3_client.pgrest.list_tables()
-        filt_resp = self.filter_tapis_results(resp, parsed_args.formatter)
+        filt_resp = self.filter_tapis_results(resp, parsed_args)
 
         headers = self.headers_from_result(filt_resp)
 
