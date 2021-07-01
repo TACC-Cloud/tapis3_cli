@@ -3,7 +3,7 @@ from ...mixins import StringIdentifier
 
 
 class TablesShow(Oauth2FormatOne, StringIdentifier):
-    """Show details for a table
+    """Show details for a table (requires table admin role)
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']
 

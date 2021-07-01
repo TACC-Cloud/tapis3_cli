@@ -33,8 +33,6 @@ class RowsCreate(Oauth2FormatOne, JSONArg, StringIdentifier):
 
         # NOTE: get_in_collection returns a list - grab first and only item
         filt_resp = self.filter_tapis_result(resp[0], parsed_args)
-        print(filt_resp)
-
         headers = self.headers_from_result(filt_resp)
         data = filt_resp.values()
 

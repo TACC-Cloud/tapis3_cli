@@ -3,7 +3,7 @@ from ...mixins import StringIdentifier
 
 
 class TablesDelete(Oauth2Common, StringIdentifier):
-    """Delete a table
+    """Delete a table (requires table admin role)
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']
 
