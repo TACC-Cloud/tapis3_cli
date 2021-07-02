@@ -16,22 +16,24 @@ class BasicAuthCommon(TapisResultsDisplay):
 
     def add_common_arguments(self, parser):
 
-        parser.add_argument('-H',
-                            '--base-url',
-                            dest='base_url',
-                            type=str,
-                            metavar='URL',
-                            help="Tapis Base URL")
+        g = parser.add_argument_group('authentication options')
 
-        parser.add_argument('--username',
-                            type=str,
-                            metavar='username',
-                            help="Tapis Username")
+        g.add_argument('-H',
+                       '--base-url',
+                       dest='base_url',
+                       type=str,
+                       metavar='URL',
+                       help="Tapis Base URL")
 
-        parser.add_argument('--password',
-                            type=str,
-                            metavar='password',
-                            help="Tapis Password")
+        g.add_argument('--username',
+                       type=str,
+                       metavar='username',
+                       help="Tapis Username")
+
+        g.add_argument('--password',
+                       type=str,
+                       metavar='password',
+                       help="Tapis Password")
 
         return parser
 
