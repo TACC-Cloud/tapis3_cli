@@ -11,10 +11,11 @@ class TapisResultsDisplay(object):
         if parsed_args is None:
             return 'table'
         else:
-            getattr(parsed_args, 'formatter', 'table')
+            return getattr(parsed_args, 'formatter', 'table')
 
     def filter_record_dict(self, record, parsed_args=None):
-        if len(self.DISPLAY_FIELDS) == 0 or self._formatter(parsed_args) != 'table':
+        if len(self.DISPLAY_FIELDS
+               ) == 0 or self._formatter(parsed_args) != 'table':
             return record
         else:
             new_record = {}

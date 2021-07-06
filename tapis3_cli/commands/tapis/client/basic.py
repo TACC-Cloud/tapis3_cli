@@ -59,16 +59,6 @@ class BasicAuthCommon(FormatNone, TapisResultsDisplay):
     def take_action(self, parsed_args):
         pass
 
-    # def filter_record_dict(self, record, formatter='table'):
-    #     if len(self.DISPLAY_FIELDS) == 0 or formatter != 'table':
-    #         return record
-    #     else:
-    #         new_record = {}
-    #         for k, v in record.items():
-    #             if k in self.DISPLAY_FIELDS:
-    #                 new_record[k] = v
-    #         return new_record
-
 
 class BasicAuthFormatOne(BasicAuthCommon, FormatOne):
     pass

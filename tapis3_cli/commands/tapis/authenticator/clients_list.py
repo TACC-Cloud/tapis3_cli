@@ -5,17 +5,17 @@ class ClientsList(BasicAuthFormatMany):
     """List available Oauth2 clients
     """
     DISPLAY_FIELDS = [
-        'client_id', 'create_time', 'last_update_time', 'display_name'
+        'client_id', 'create_time', 'description', 'display_name'
     ]
 
     def take_action(self, parsed_args):
         self.load_client(parsed_args)
         resp = self.tapis3_client.authenticator.list_clients()
-        filt_resp = [
-            self.filter_record_dict(o.__dict__, parsed_args) for o in resp
-        ]
-        headers = [k for k in filt_resp[0].keys()]
+
+        filt_resp = self.filter_tapis_results(resp, parsed_args)
+        headers = self.headers_from_result(filt_resp)
         data = []
         for item in filt_resp:
             data.append(item.values())
+
         return (headers, data)
