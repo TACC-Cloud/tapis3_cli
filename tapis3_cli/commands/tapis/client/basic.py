@@ -1,4 +1,4 @@
-from tapis3_cli.formatters import FormatOne, FormatMany
+from tapis3_cli.formatters import FormatNone, FormatOne, FormatMany
 from tapis3_cli.settings.config import config_directory
 from tapis3_cli import cache
 from tapis3_cli.cache.client import TapisLocalCache
@@ -9,7 +9,7 @@ from .filter import TapisResultsDisplay
 __all__ = ['BasicAuthFormatOne', 'BasicAuthFormatMany', 'BasicAuthCommon']
 
 
-class BasicAuthCommon(TapisResultsDisplay):
+class BasicAuthCommon(FormatNone, TapisResultsDisplay):
 
     tapis3_client = None
     tapis3_client_cache = None
@@ -52,7 +52,7 @@ class BasicAuthCommon(TapisResultsDisplay):
                                              password=parsed_args.password)
         try:
             self.tapis3_client.get_tokens()
-            self.tapis3_client.refresh_tokens()
+            # self.tapis3_client.refresh_tokens()
         except Exception as exc:
             warnings.warn(str(exc))
 
