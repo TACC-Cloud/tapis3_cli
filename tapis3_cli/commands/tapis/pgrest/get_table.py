@@ -1,29 +1,34 @@
-from ..client import Oauth2FormatOne
+from ..client import Oauth2FormatMany
 from ...mixins import StringIdentifier
+from ...mixins import LimitsArgs
 
 
-class TablesShow(Oauth2FormatOne, StringIdentifier):
-    """Show details for a table (requires table admin role)
+class RowsList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
+    """List rows in a collection
     """
-    DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']
+    DISPLAY_FIELDS = []
 
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
         parser = super().add_identifier(parser,
-                                        name='Table ID',
-                                        destination='table_id',
+                                        name='Table root URL',
+                                        destination='root_url',
                                         optional=False)
+        parser = LimitsArgs.extend_parser(self, parser)
         return parser
 
     def take_action(self, parsed_args):
 
         self.load_client(parsed_args)
-        table_id = self.get_identifier(parsed_args, 'table_id')
-        resp = self.tapis3_client.pgrest.get_table(table_id=table_id,
-                                                   details=True)
+        root_url = self.get_identifier(parsed_args, 'root_url')
+        resp = self.tapis3_client.pgrest.get_table(collection=root_url,
+                                                   limit=parsed_args.limit,
+                                                   offset=parsed_args.offset)
+        filt_resp = self.filter_tapis_results(resp, parsed_args)
 
-        filt_resp = self.filter_tapis_result(resp, parsed_args)
         headers = self.headers_from_result(filt_resp)
-        data = filt_resp.values()
+        data = []
+        for item in filt_resp:
+            data.append(item.values())
 
         return (headers, data)
