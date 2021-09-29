@@ -77,7 +77,6 @@ class JSONArg(ParserExtender):
         else:
             nargs = None
 
-
         parser.add_argument('-F',
                             default=sys.stdin,
                             dest=dest,

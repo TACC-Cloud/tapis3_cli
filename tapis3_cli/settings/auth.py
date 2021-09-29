@@ -6,7 +6,10 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from .helpers import (array_from_string, fix_assets_path, int_or_none,
                       ns_os_environ_get, parse_boolean, set_from_string)
 
-__all__ = ['TAPIS3_CLI_VERIFY_SSL', 'TAPIS3_CLI_WARN_INSECURE_SSL', 'TAPIS3_CLI_CLIENT_FILE']
+__all__ = [
+    'TAPIS3_CLI_VERIFY_SSL', 'TAPIS3_CLI_WARN_INSECURE_SSL',
+    'TAPIS3_CLI_CLIENT_FILE'
+]
 
 # Whether Tapis API calls should verify SSL certificates. Inherits default
 # from current TapisPy setting. Depends on agavepy==1.0.0a9
