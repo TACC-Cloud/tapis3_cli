@@ -4,7 +4,7 @@ from ..client import Oauth2FormatMany
 class TablesList(Oauth2FormatMany):
     """List available tables (requires table admin role)
     """
-    DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id']
+    DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'comments']
 
     def take_action(self, parsed_args):
 

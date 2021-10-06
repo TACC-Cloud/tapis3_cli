@@ -5,7 +5,7 @@ from ...mixins import StringIdentifier
 class TablesShow(Oauth2FormatOne, StringIdentifier):
     """Show details for a table (requires table admin role)
     """
-    DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']
+    DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns', 'comments']
 
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
