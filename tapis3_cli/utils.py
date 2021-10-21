@@ -1,5 +1,6 @@
 """Public, low-dependency helper functions
 """
+import collections
 import datetime
 import fnmatch
 import getpass
@@ -8,6 +9,7 @@ import json
 import os
 import re
 import sys
+import tapipy
 from pathlib import Path
 from socket import getfqdn
 
@@ -426,3 +428,15 @@ def slugify(text, separator='_'):
             raise
     except Exception:
         raise
+
+def flatten(d, parent_key='', sep='.'):
+    items = []
+    for k, v in d.items():
+        new_key = parent_key + sep + k if parent_key else k
+        if isinstance(v, collections.MutableMapping):
+            items.extend(flatten(v, new_key, sep=sep).items())
+        if isinstance(v, tapipy.tapis.TapisResult):
+            items.extend(flatten(v.__dict__, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)

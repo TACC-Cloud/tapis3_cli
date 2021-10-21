@@ -7,3 +7,8 @@ from .get_table_row import RowsShow
 from .delete_table_row import RowsDelete
 from .add_table_row import RowsCreate
 from .update_table_row import RowsUpdate
+from .list_views import ViewsList
+from .create_view import ViewsCreate
+from .delete_view import ViewsDelete
+from .get_manage_view import ViewsShow
+from .get_view import ViewsRowsList
