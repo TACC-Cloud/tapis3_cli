@@ -20,6 +20,7 @@ class NoncesList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
                             dest='is_alias',
                             action='store_true',
                             help='Identifier is an Alias')
+        # TODO - reenable this once limit and offset are supported by V3 Abaco
         # parser = LimitsArgs.extend_parser(self, parser)
         return parser
 
