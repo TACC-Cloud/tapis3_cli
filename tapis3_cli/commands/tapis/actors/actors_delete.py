@@ -16,4 +16,9 @@ class ActorsDelete(Oauth2Common, StringIdentifier):
         return parser
 
     def take_action(self, parsed_args):
-        return ((), ())
+        super(ActorsDelete, self).take_action(parsed_args)
+        self.load_client(parsed_args)
+        self.config = {}
+        self.config['actor_id'] = parsed_args.actor_id
+        resp = self.tapis3_client.actors.deleteActor(**self.config)
+        # No return since this is Oauth2Common
