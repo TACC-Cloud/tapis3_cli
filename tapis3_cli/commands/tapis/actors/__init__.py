@@ -7,3 +7,7 @@ from .aliases_create import AliasesCreate
 from .aliases_delete import AliasesDelete
 from .aliases_update import AliasesUpdate
 from .aliases_list import AliasesList
+from .nonces_list import NoncesList
+from .nonces_create import NoncesCreate
+from .nonces_delete import NoncesDelete
+from .nonces_show import NoncesShow

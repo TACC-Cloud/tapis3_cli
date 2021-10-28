@@ -33,7 +33,11 @@ class TapisResultsDisplay(object):
             return new_record
 
     def filter_tapis_result(self, tapis_response, parsed_args=None):
-        return self.filter_record_dict(tapis_response.__dict__, parsed_args)
+        try:
+            dct = tapis_response.__dict__
+        except AttributeError:
+            dct = tapis_response
+        return self.filter_record_dict(dct, parsed_args)
 
     def filter_tapis_results(self, tapis_response, parsed_args=None):
         try:

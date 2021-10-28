@@ -6,6 +6,8 @@ import json
 from tapipy.tapis import Tapis
 from tapis3_cli.settings.config import TAPIS3_CLI_CONFIG_DIR
 
+from . import direct
+
 DEFAULT_CACHE_FILE = 'client'
 DEFAULT_TTL = 14400
 
