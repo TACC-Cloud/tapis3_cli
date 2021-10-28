@@ -16,3 +16,4 @@ temp/
 env2/
 tests/configuration.json
 *.bak
+docs/requirements.txt
