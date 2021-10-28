@@ -14,8 +14,16 @@ class TapisResultsDisplay(object):
             return getattr(parsed_args, 'formatter', 'table')
 
     def filter_record_dict(self, record, parsed_args=None):
-        if len(self.DISPLAY_FIELDS
-               ) == 0 or self._formatter(parsed_args) != 'table':
+        if self._formatter(parsed_args) != 'table':
+            return record
+        elif len(self.DISPLAY_FIELDS) == 0:
+            # Some fields, like '_links', never make sense to show interactively
+            NEVER_DISPLAY_IN_TABLE = ['_links']
+            for k in NEVER_DISPLAY_IN_TABLE:
+                try:
+                    del record[k]
+                except KeyError:
+                    pass
             return record
         else:
             new_record = {}
