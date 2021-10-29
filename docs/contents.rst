@@ -20,6 +20,7 @@ Welcome to Tapis3 CLI
    usage/_overview.rst
    usage/actors.rst
    usage/pgrest.rst
+   usage/sk.rst
 
 .. toctree::
    :maxdepth: 1

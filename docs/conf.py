@@ -25,7 +25,7 @@ sys.path.insert(
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
 # Cliff options
-autoprogram_cliff_application = 'tapis'
+autoprogram_cliff_application = 'tapis3'
 autoprogram_cliff_ignored = [
     '--format', '--column', '--sort-column', '--help', '--noindent',
     '--prefix', '--print-empty', '--max-width', '--fit-width', '--quote',

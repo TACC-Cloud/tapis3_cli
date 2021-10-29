@@ -2,9 +2,7 @@
 Actors
 ######
 
-Support for Tapis actors (also known as Abaco actors) is is provided by the 
-**actors** command set. It includes supplementary workflows for creating 
-and deploying actor projects such as ``actors init`` and ``actors deploy``.
+Support for Tapis Actors_ is is provided by the **actors** command set. 
 
 *******
 General
@@ -58,7 +56,9 @@ Nonces
 
 Generate and manage Nonces, which are a kind of API key for 
 Actors that allow them to be used without authenticating to the 
-Tapis platform. 
+Tapis platform. Nonces can be issued against individual actorIds 
+but can also be issued for aliases. The ``-A`` option must be 
+passed to specify that the Actor identifier is an alias.
 
 .. autoprogram-cliff:: tapis3.cli
    :command: actors nonces *
@@ -70,7 +70,7 @@ Grant and manage update and execution rights for an
 Actor to other Tapis platform users. 
 
 .. autoprogram-cliff:: tapis3.cli
-   :command: actors permissions *
+   :command: actors pems *
 
 **************
 Administration
@@ -103,14 +103,5 @@ messages.
 .. autoprogram-cliff:: tapis3.cli
    :command: actors workers *
 
-********
-Projects
-********
 
-Create and deploy new actors from a configuration-driven template. 
-
-.. autoprogram-cliff:: tapis3.cli
-   :command: apps init
-
-.. autoprogram-cliff:: tapis3.cli
-   :command: apps deploy
+.. _Actors: https://tapis.readthedocs.io/en/latest/technical/actors.html
