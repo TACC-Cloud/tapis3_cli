@@ -34,7 +34,10 @@ class SKCommonArgs(ParserExtender):
 
 class SKSecretNameArg(ParserExtender):
     def extend_parser(self, parser):
-        parser.add_argument('secret_name', type=str, help='Secret Name')
+        parser.add_argument('secret_name',
+                            metavar='SECRET_NAME',
+                            type=str,
+                            help='Secret Name')
         return parser
 
 

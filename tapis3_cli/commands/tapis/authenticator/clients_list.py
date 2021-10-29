@@ -2,7 +2,7 @@ from ..client import BasicAuthFormatMany
 
 
 class ClientsList(BasicAuthFormatMany):
-    """List available Oauth2 clients
+    """List available Tapis Oauth2 clients.
     """
     DISPLAY_FIELDS = [
         'client_id', 'create_time', 'description', 'display_name'

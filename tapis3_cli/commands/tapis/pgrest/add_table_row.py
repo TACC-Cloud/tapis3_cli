@@ -5,7 +5,7 @@ __all__ = ['RowsCreate']
 
 
 class RowsCreate(Oauth2FormatOne, JSONArg, StringIdentifier):
-    """Create a row in a collection
+    """Create a Row in a Table.
     """
     DISPLAY_FIELDS = []
 

@@ -5,7 +5,7 @@ __all__ = ['AliasesDelete']
 
 
 class AliasesDelete(Oauth2Common, StringIdentifier):
-    """Delete an Alias
+    """Delete an Alias.
     """
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)

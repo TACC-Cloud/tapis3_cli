@@ -5,7 +5,7 @@ __all__ = ['RowsDelete']
 
 
 class RowsDelete(Oauth2Common, StringIdentifier):
-    """Delete a row from a collection
+    """Delete a Row from a Table.
     """
     DISPLAY_FIELDS = []
 

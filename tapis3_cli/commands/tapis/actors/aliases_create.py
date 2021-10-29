@@ -5,7 +5,7 @@ __all__ = ['AliasesCreate']
 
 
 class AliasesCreate(Oauth2FormatOne, StringIdentifier):
-    """Create an Alias to an Actor
+    """Create an Alias for an Actor.
     """
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)

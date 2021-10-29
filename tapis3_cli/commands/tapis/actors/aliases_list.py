@@ -3,7 +3,7 @@ from ...mixins import LimitsArgs
 
 
 class AliasesList(Oauth2FormatMany, LimitsArgs):
-    """List available Aliases
+    """List Aliases.
     """
     def get_parser(self, prog_name):
         parser = super(AliasesList, self).get_parser(prog_name)

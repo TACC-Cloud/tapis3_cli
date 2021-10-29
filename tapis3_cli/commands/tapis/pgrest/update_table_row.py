@@ -5,7 +5,7 @@ __all__ = ['RowsUpdate']
 
 
 class RowsUpdate(Oauth2FormatOne, JSONArg, StringIdentifier):
-    """Update a row in a collection
+    """Update a Row in a Table.
     """
     DISPLAY_FIELDS = []
 

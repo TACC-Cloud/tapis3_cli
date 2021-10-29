@@ -5,7 +5,7 @@ __all__ = ['AliasesUpdate']
 
 
 class AliasesUpdate(Oauth2FormatOne, StringIdentifier):
-    """Point an Alias to another Actor
+    """Point an Alias to another Actor.
     """
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)

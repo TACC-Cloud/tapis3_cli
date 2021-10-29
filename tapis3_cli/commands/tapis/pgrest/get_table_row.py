@@ -3,7 +3,7 @@ from ...mixins import StringIdentifier
 
 
 class RowsShow(Oauth2FormatOne, StringIdentifier):
-    """Show contents of a row in a collection
+    """Show contents of a Row in a Table.
     """
     DISPLAY_FIELDS = []
 

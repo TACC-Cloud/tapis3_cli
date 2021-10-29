@@ -5,7 +5,7 @@ from .common import SKCommonArgs, SKSecretNameArg, SKSecretJSONFileArg
 
 class SecretsWrite(Oauth2FormatOne, SKCommonArgs, SKSecretNameArg,
                    SKSecretJSONFileArg):
-    """Write a user secret
+    """Write a user Secret.
     """
     DISPLAY_FIELDS = ['created_time', 'deletion_time', 'destroyed', 'version']
 

@@ -3,7 +3,7 @@ from ..client import Oauth2FormatMany
 
 
 class SitesList(Oauth2FormatMany):
-    """List available Tapis sites
+    """List available Tapis Sites.
     """
     DISPLAY_FIELDS = ['site_id', 'primary', 'base_url']
 

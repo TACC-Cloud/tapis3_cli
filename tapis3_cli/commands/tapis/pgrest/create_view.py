@@ -3,7 +3,7 @@ from ...mixins import JSONArg
 
 
 class ViewsCreate(Oauth2FormatOne, JSONArg):
-    """Create a new view (requires view admin role)
+    """Create a new View (requires view admin role).
     """
     DISPLAY_FIELDS = ['view_name', 'root_url', 'view_id', 'columns']
 

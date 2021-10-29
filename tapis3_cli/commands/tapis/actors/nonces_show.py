@@ -4,7 +4,7 @@ from ...mixins import LimitsArgs, StringIdentifier
 
 
 class NoncesShow(Oauth2FormatOne, StringIdentifier):
-    """Display details for a Nonce
+    """Display details for a Nonce.
     """
     def get_parser(self, prog_name):
         parser = super(NoncesShow, self).get_parser(prog_name)

@@ -4,7 +4,7 @@ from ...mixins import LimitsArgs
 
 
 class ViewsRowsList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
-    """List rows in a view
+    """List Rows in a View.
     """
     DISPLAY_FIELDS = []
 

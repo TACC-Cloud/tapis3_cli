@@ -3,7 +3,7 @@ from ...mixins import StringIdentifier
 
 
 class ClientsDelete(BasicAuthCommon, StringIdentifier):
-    """Delete an Oauth2 client
+    """Delete a Tapis Oauth2 client.
     """
     DISPLAY_FIELDS = []
 

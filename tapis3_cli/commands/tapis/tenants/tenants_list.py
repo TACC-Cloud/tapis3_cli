@@ -8,7 +8,7 @@ class TenantIdentifier(StringIdentifier):
 
 
 class TenantsList(Oauth2FormatMany):
-    """List available Tapis tenants
+    """List available Tapis Tenants.
     """
     DISPLAY_FIELDS = ['site_id', 'tenant_id', 'owner', 'description']
 

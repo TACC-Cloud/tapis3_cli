@@ -8,6 +8,8 @@ __all__ = ['ActorsExecsLogs']
 
 
 class ActorsExecsLogs(Oauth2FormatOne, StringIdentifier):
+    """Get logs for an Execution.
+    """
     def get_parser(self, prog_name):
         parser = super(ActorsExecsLogs, self).get_parser(prog_name)
         parser = self.extend_parser(parser)

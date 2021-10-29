@@ -8,7 +8,7 @@ __all__ = ['ActorsExecsList']
 
 
 class ActorsExecsList(Oauth2FormatMany, StringIdentifier, LimitsArgs):
-    """List available Executions for an Actor
+    """List Executions for an Actor.
     """
     def get_parser(self, prog_name):
         parser = super(ActorsExecsList, self).get_parser(prog_name)

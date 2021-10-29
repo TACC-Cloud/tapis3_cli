@@ -17,7 +17,7 @@ def defined_client_id(context):
 
 
 class AuthInit(FormatNone):
-    """Configure a Tapis client on this host
+    """Configure a Tapis client on the current host.
     """
 
     interactive = False

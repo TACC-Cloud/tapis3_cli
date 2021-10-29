@@ -3,7 +3,7 @@ from ...mixins import StringIdentifier
 
 
 class ClientsShow(BasicAuthFormatOne, StringIdentifier):
-    """Show details for one Oauth2 client
+    """Show details for a Tapis Oauth2 client.
     """
 
     DISPLAY_FIELDS = [

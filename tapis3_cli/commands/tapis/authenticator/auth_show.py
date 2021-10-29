@@ -2,7 +2,7 @@ from ..client import NoAuthFormatOne
 
 
 class AuthShow(NoAuthFormatOne):
-    """Show current Auth configuration
+    """Show current Tapis client configuration on this host.
     """
     def take_action(self, parsed_args):
         self.load_client(parsed_args)

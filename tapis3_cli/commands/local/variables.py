@@ -1,9 +1,9 @@
 from configparser import SectionProxy
-from tapis_cli.commands.taccapis.formatters import (
+from tapis3_cli.commands.taccapis.formatters import (
     TaccApisFormatManyUnlimited, TaccApisFormatOne)
-from tapis_cli.clients.services.mixins import UploadJSONTemplate
-from tapis_cli.templating import dot_notation
-from tapis_cli.project_ini import generate_template_ini, save_config
+from tapis3_cli.clients.services.mixins import UploadJSONTemplate
+from tapis3_cli.templating import dot_notation
+from tapis3_cli.project_ini import generate_template_ini, save_config
 
 __all__ = ['VariablesList', 'VariablesInit']
 

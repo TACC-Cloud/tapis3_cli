@@ -3,7 +3,7 @@ from .common import SKCommonArgs
 
 
 class SecretsList(Oauth2FormatOne, SKCommonArgs):
-    """List user secrets
+    """List user Secrets.
     """
     DISPLAY_FIELDS = ['keys', 'secretPath']
 

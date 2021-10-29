@@ -4,7 +4,7 @@ from tapis3_cli.utils import flatten
 
 
 class ViewsShow(Oauth2FormatOne, StringIdentifier):
-    """Show details for a view (requires view admin role)
+    """Show details for a View (requires view admin role).
     """
     DISPLAY_FIELDS = []
 

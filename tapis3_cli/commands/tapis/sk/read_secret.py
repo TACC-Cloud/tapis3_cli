@@ -5,7 +5,7 @@ from .common import SKCommonArgs, SKSecretNameArg, SKSecretJSONFileArg
 
 class SecretsRead(Oauth2FormatOne, SKCommonArgs, SKSecretNameArg,
                   SKSecretJSONFileArg):
-    """Read a user secret
+    """Read a user Secret.
     """
     DISPLAY_FIELDS = ['secretMap']
 

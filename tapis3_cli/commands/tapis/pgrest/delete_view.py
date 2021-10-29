@@ -3,7 +3,7 @@ from ...mixins import StringIdentifier
 
 
 class ViewsDelete(Oauth2Common, StringIdentifier):
-    """Delete a view (requires view admin role)
+    """Delete a View (requires view admin role).
     """
     DISPLAY_FIELDS = [
         'view_name', 'root_url', 'view_id', 'manage_view_id', 'comments'

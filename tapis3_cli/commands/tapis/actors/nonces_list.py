@@ -4,7 +4,7 @@ from ...mixins import LimitsArgs, StringIdentifier
 
 
 class NoncesList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
-    """List active Nonces for an Actor
+    """List Nonces for an Actor.
     """
     DISPLAY_FIELDS = [
         'actorId', 'id', 'lastUseTime', 'level', 'remainingUses', 'owner'

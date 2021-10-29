@@ -2,7 +2,7 @@ from ..client import Oauth2FormatMany
 
 
 class ViewsList(Oauth2FormatMany):
-    """List available views (requires views admin role)
+    """List Views (requires views admin role).
     """
     DISPLAY_FIELDS = [
         'view_name', 'root_url', 'view_id', 'manage_view_id', 'comments'

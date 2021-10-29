@@ -5,7 +5,7 @@ __all__ = ['ActorsDelete']
 
 
 class ActorsDelete(Oauth2Common, StringIdentifier):
-    """Delete an Actor
+    """Delete an Actor.
     """
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)

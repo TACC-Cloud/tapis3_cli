@@ -3,7 +3,7 @@ from ...mixins import JSONArg
 
 
 class TablesCreate(Oauth2FormatOne, JSONArg):
-    """Create a new table (requires table admin role)
+    """Create a new Table (requires table admin role).
     """
     DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'columns']
 

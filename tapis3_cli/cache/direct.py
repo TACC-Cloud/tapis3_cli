@@ -2,6 +2,7 @@ import requests
 
 __all__ = ['TapisDirectClient']
 
+
 class TapisDirectClient(object):
     """Requests client bootstrapped from a Tapis API client
     The intended use is to implement methods not expressed by the

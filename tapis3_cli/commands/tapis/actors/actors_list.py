@@ -3,7 +3,7 @@ from ...mixins import LimitsArgs
 
 
 class ActorsList(Oauth2FormatMany, LimitsArgs):
-    """List available Actors
+    """List Actors.
     """
     DISPLAY_FIELDS = [
         'id', 'name', 'owner', 'image', 'lastUpdateTime', 'status'
