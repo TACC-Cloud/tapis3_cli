@@ -1,6 +1,6 @@
-####################
+#####################
 Welcome to Tapis3 CLI
-####################
+#####################
 
 |docs| 
 
@@ -8,9 +8,18 @@ Welcome to Tapis3 CLI
 
 .. toctree::
    :maxdepth: 1
+   :caption: Introduction
+
+   start/what-is-tapis3-cli
+   start/get-in-touch
+
+.. toctree::
+   :maxdepth: 1
    :caption: Command Reference
 
+   usage/_overview.rst
    usage/actors.rst
+   usage/pgrest.rst
 
 .. toctree::
    :maxdepth: 1

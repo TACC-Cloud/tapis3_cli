@@ -29,7 +29,8 @@ autoprogram_cliff_application = 'tapis'
 autoprogram_cliff_ignored = [
     '--format', '--column', '--sort-column', '--help', '--noindent',
     '--prefix', '--print-empty', '--max-width', '--fit-width', '--quote',
-    '--no-verify', '--token', '--api-server'
+    '--no-verify', '--token', '--api-server', '--base-url', '--username', 
+    '--password', '-C', '--sort-ascending', '--sort-descending'
 ]
 
 # -- Project information -----------------------------------------------------
