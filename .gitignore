@@ -1,9 +1,9 @@
 .env
 env/
-*__pycache__/*
+*__pycache__/
 *.pyc
 .vscode/
-*egg-info/*
+*egg-info/
 htmlcov
 .coverage
 .DS_Store
@@ -13,7 +13,5 @@ build/*
 .tox/
 dist
 temp/
-env2/
-tests/configuration.json
 *.bak
 docs/requirements.txt

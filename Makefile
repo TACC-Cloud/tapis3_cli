@@ -14,3 +14,8 @@ docs-autodoc:
 
 docs-clean:
 	cd docs && make clean
+
+reformat-source:
+	yapf -i --recursive tapis3_cli
+
+reformat: reformat-source
