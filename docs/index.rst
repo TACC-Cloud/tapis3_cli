@@ -15,12 +15,27 @@ Welcome to Tapis3 CLI
 
 .. toctree::
    :maxdepth: 1
+   :caption: Get Started
+
+   start/install
+   start/help
+
+.. toctree::
+   :maxdepth: 1
    :caption: Command Reference
 
    usage/_overview.rst
    usage/actors.rst
    usage/pgrest.rst
    usage/sk.rst
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contributing
+
+   contribute/develop.rst
+   contribute/docs.rst
+   contribute/release.rst
 
 .. toctree::
    :maxdepth: 1
