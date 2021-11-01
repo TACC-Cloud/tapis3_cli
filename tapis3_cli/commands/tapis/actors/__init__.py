@@ -1,4 +1,5 @@
-from .manage import ActorsCreate, ActorsUpdate
+from .manage import ActorsCreate
+from .manage import ActorsUpdate
 from .actors_list import ActorsList
 from .actors_delete import ActorsDelete
 from .message import ActorsRun, ActorsSubmit

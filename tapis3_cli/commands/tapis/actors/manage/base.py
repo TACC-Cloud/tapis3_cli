@@ -22,6 +22,20 @@ class ActorsManage(Oauth2FormatOne, StringIdentifier):
 
     def extend_parser(self, parser):
 
+        if self.CREATE_ONLY:
+            parser = super().add_identifier(parser,
+                                            name='Docker Repo',
+                                            metavar='REPO',
+                                            destination='actor_repo',
+                                            optional=False)
+        else:
+            parser.add_argument('-d',
+                                '--repo',
+                                dest='actor_repo',
+                                metavar='REPO',
+                                type=str,
+                                help='Docker Repo')
+
         # Only accept actorId on update
         if not self.CREATE_ONLY:
             parser = super().add_identifier(parser,
@@ -29,28 +43,25 @@ class ActorsManage(Oauth2FormatOne, StringIdentifier):
                                             destination='actor_id',
                                             optional=False)
 
-        parser.add_argument('--repo',
-                            dest='actor_repo',
-                            type=str,
-                            required=True,
-                            help='Docker image repo for the Actor')
-
         if self.CREATE_ONLY:
-            # Allow specification of name on create
-            parser.add_argument('-n',
-                                '--name',
-                                dest='actor_name',
-                                metavar='NAME',
+            super().add_identifier(parser,
+                                   name='Actor Name',
+                                   destination='actor_name',
+                                   optional=False)
+            parser.add_argument('-d',
+                                '--description',
+                                dest='actor_description',
+                                metavar='DESCRIPTION',
                                 type=str,
-                                required=True,
-                                help='Name of the Actor')
+                                help='Plaintext description of the Actor')
 
-        parser.add_argument('-d',
-                            '--description',
-                            dest='actor_description',
-                            metavar='DESCRIPTION',
-                            type=str,
-                            help='Plaintext description of the Actor')
+            # parser.add_argument('-n',
+            #                     '--name',
+            #                     dest='actor_name',
+            #                     metavar='NAME',
+            #                     type=str,
+            #                     required=True,
+            #                     help='Name of the Actor')
 
         if self.CREATE_ONLY:
             # Stateful
