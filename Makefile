@@ -20,7 +20,14 @@ lint-source:
 
 lint: lint-source
 
+sort-source:
+	isort tapis3_cli
+
+sort: sort-source
+
 reformat-source:
 	black tapis3_cli
 
 reformat: reformat-source
+
+code-quality: sort reformat

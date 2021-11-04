@@ -6,8 +6,7 @@ from tapipy.tapis import Tapis
 from tapis3_cli import cache, settings
 from tapis3_cli.cache.client import TapisLocalCache
 from tapis3_cli.settings.auth import TAPIS3_CLI_CLIENT_FILE
-from tapis3_cli.utils import (get_hostname, prompt, prompt_accept,
-                              prompt_boolean)
+from tapis3_cli.utils import get_hostname, prompt, prompt_accept, prompt_boolean
 
 from ....formatters import FormatNone
 from ..client import NoAuthFormatOne
