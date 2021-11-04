@@ -14,6 +14,10 @@ class TapisResultsDisplay(object):
             return getattr(parsed_args, 'formatter', 'table')
 
     def filter_record_dict(self, record, parsed_args=None):
+
+        if not isinstance(record, dict):
+            record = record.__dict__
+
         if self._formatter(parsed_args) != 'table':
             return record
         elif len(self.DISPLAY_FIELDS) == 0:
@@ -42,7 +46,8 @@ class TapisResultsDisplay(object):
     def filter_tapis_results(self, tapis_response, parsed_args=None):
         try:
             filtered = [
-                self.filter_record_dict(o.__dict__, parsed_args)
+                # self.filter_record_dict(o.__dict__, parsed_args)
+                self.filter_record_dict(o, parsed_args)
                 for o in tapis_response
             ]
             return filtered

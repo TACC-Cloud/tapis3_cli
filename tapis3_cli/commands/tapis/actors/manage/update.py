@@ -11,6 +11,7 @@ class ActorsUpdate(ActorsManage):
     def take_action(self, parsed_args):
         super(ActorsUpdate, self).take_action(parsed_args)
         config = self.get_configuration(parsed_args)
+        config['force'] = True
         actor_id = self.get_identifier(parsed_args, 'actor_id')
 
         # TapisResult

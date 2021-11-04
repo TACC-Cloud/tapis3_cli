@@ -24,7 +24,6 @@ class AliasesList(Oauth2FormatMany, LimitsArgs):
         resp = self.tapis3_client.actors.listAliases(**self.config)
 
         filt_resp = self.filter_tapis_results(resp, parsed_args)
-
         headers = self.headers_from_result(filt_resp)
 
         data = []

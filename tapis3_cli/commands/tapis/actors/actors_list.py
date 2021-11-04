@@ -31,7 +31,6 @@ class ActorsList(Oauth2FormatMany, LimitsArgs):
         filt_resp = self.filter_tapis_results(resp, parsed_args)
 
         headers = self.headers_from_result(filt_resp)
-
         data = []
         for item in filt_resp:
             data.append(item.values())
