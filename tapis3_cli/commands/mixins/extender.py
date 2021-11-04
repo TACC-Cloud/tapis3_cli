@@ -1,12 +1,12 @@
-__all__ = ['ParserExtender']
+__all__ = ["ParserExtender"]
 
 
 class ParserExtender(object):
 
-    working_dir = '.'
+    working_dir = "."
 
     def getwd(self):
-        return getattr(self, 'working_dir')
+        return getattr(self, "working_dir")
 
     def extend_parser(self, parser):
         # When sublcassing: DO NOT FORGET TO RETURN PARSER

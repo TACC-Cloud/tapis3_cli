@@ -3,24 +3,26 @@ from tapis3_cli.formatters import FormatOne
 
 from .mixins import SettingName
 
-__all__ = ['SettingsGet']
+__all__ = ["SettingsGet"]
 
 
 class SettingsGet(FormatOne, SettingName):
-    """Get a Tapis CLI setting
-    """
+    """Get a Tapis CLI setting"""
+
     def get_parser(self, prog_name):
         parser = super(SettingsGet, self).get_parser(prog_name)
-        parser = super().add_identifier(parser,
-                                        name='Setting Name',
-                                        metavar='SETTING',
-                                        destination='setting_name',
-                                        optional=False)
+        parser = super().add_identifier(
+            parser,
+            name="Setting Name",
+            metavar="SETTING",
+            destination="setting_name",
+            optional=False,
+        )
         return parser
 
     def take_action(self, parsed_args):
         # super(SettingsGet, self).take_action(parsed_args)
-        setting_name = self.get_identifier(parsed_args, 'setting_name')
+        setting_name = self.get_identifier(parsed_args, "setting_name")
         self.validate_identifier(setting_name, allow_private=True)
 
         headers = []

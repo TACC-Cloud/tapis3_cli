@@ -26,7 +26,8 @@ def current_time():
         A ``datetime`` object rounded to millisecond precision
     """
     return datetime.datetime.fromtimestamp(
-        int(datetime.datetime.utcnow().timestamp() * 1000) / 1000)
+        int(datetime.datetime.utcnow().timestamp() * 1000) / 1000
+    )
 
 
 def ts_to_isodate(date_string, include_time=False):
@@ -37,7 +38,7 @@ def ts_to_isodate(date_string, include_time=False):
     try:
         date = parse(date_string)
         if include_time:
-            date.isoformat(timespec='seconds')
+            date.isoformat(timespec="seconds")
         else:
             iso_date_str = date.date().isoformat()
     except ValueError:
@@ -53,7 +54,7 @@ def ts_to_date(date_string):
 
     try:
         date = parse(date_string)
-        date_rep = date.strftime('%b %d %H:%M:%S %Y')
+        date_rep = date.strftime("%b %d %H:%M:%S %Y")
     except ValueError:
         pass
 
@@ -77,44 +78,40 @@ def ts_to_date(date_string):
 
 
 def command_set():
-    """Discover and return the full complement of commands
-    """
-    FILTERED = ('complete', 'help')
+    """Discover and return the full complement of commands"""
+    FILTERED = ("complete", "help")
     cset = list()
-    epts = pkg_resources.iter_entry_points('tapis3.cli')
+    epts = pkg_resources.iter_entry_points("tapis3.cli")
     for e in epts:
         ename = e.name
         if ename not in FILTERED:
-            ename = ename.replace('_', ' ')
+            ename = ename.replace("_", " ")
         cset.append(ename)
     cset.sort()
     return cset
 
 
 def fmtcols(mylist, cols):
-    """Generate a string of tab and newline delimited columns from a list
-    """
-    lines = ("\t".join(mylist[i:i + cols])
-             for i in range(0, len(mylist), cols))
-    return '\n'.join(lines)
+    """Generate a string of tab and newline delimited columns from a list"""
+    lines = ("\t".join(mylist[i : i + cols]) for i in range(0, len(mylist), cols))
+    return "\n".join(lines)
 
 
 def redact(value):
-    return value[0] + ('*' * (len(value) - 2)) + value[-1]
+    return value[0] + ("*" * (len(value) - 2)) + value[-1]
 
 
 def prompt(body, default=None, secret=False, allow_empty=True):
-    """Prompt user for input
-    """
+    """Prompt user for input"""
     if default is not None:
         if secret is False:
             fdefault = default
         else:
             # Mask out all but first and last two chars of secret value
             fdefault = redact(default)
-        qtext = '{0} [{1}]: '.format(body, fdefault)
+        qtext = "{0} [{1}]: ".format(body, fdefault)
     else:
-        qtext = '{0}: '.format(body)
+        qtext = "{0}: ".format(body)
 
     try:
         if not secret:
@@ -127,28 +124,28 @@ def prompt(body, default=None, secret=False, allow_empty=True):
     except Exception:
         raise
 
-    if (response is None or response == '') and default is not None:
+    if (response is None or response == "") and default is not None:
         response = default
     else:
         response = response.strip()
 
-    if (response is None or response == '') and allow_empty is False:
-        raise ValueError('This value cannot be empty.')
+    if (response is None or response == "") and allow_empty is False:
+        raise ValueError("This value cannot be empty.")
     else:
         return response
 
 
-def prompt_accept(body, default='y', exit_reject=True):
+def prompt_accept(body, default="y", exit_reject=True):
     if default is None:
         qtext = "{0} (type 'y' or 'n' then Return) ".format(body)
-    elif default == 'y':
-        qtext = '{0} [Y/n]: '.format(body)
+    elif default == "y":
+        qtext = "{0} [Y/n]: ".format(body)
     else:
-        qtext = '{0} [y/N]: '.format(body)
+        qtext = "{0} [y/N]: ".format(body)
 
     try:
         response = input(qtext).lower()
-        if response == '':
+        if response == "":
             response = default
     except KeyboardInterrupt:
         print()
@@ -156,7 +153,7 @@ def prompt_accept(body, default='y', exit_reject=True):
     except Exception:
         raise
 
-    if isinstance(response, str) and response.startswith('y'):
+    if isinstance(response, str) and response.startswith("y"):
         return True
     else:
         if exit_reject:
@@ -167,31 +164,28 @@ def prompt_accept(body, default='y', exit_reject=True):
 
 def prompt_boolean(body, default=True):
     if default is True:
-        strdef = 'y'
+        strdef = "y"
     else:
-        strdef = 'n'
+        strdef = "n"
     return prompt_accept(body, default=strdef, exit_reject=False)
 
 
 def get_hostname():
-    """Returns the fully-qualified domain name for current localhost
-    """
+    """Returns the fully-qualified domain name for current localhost"""
     return getfqdn().lower()
 
 
 def get_public_ip():
-    """Returns localhost's public IP address (or NAT gateway address)
-    """
+    """Returns localhost's public IP address (or NAT gateway address)"""
     try:
-        ip = get('https://api.ipify.org', timeout=1.0).text
+        ip = get("https://api.ipify.org", timeout=1.0).text
         return ip
     except Exception:
-        return '127.0.0.1'
+        return "127.0.0.1"
 
 
 def get_local_username():
-    """Returns local system username
-    """
+    """Returns local system username"""
     return getpass.getuser()
 
 
@@ -204,15 +198,14 @@ def normalize(file_path):
     Returns:
         str: Normalized file_path
     """
-    fp = re.sub('^(/)+', '', file_path)
-    fp = re.sub('(/)+$', '', fp)
+    fp = re.sub("^(/)+", "", file_path)
+    fp = re.sub("(/)+$", "", fp)
     return fp
 
 
-def relpath(file_path, root='/'):
-    """Returns path relative to start
-    """
-    fp = re.sub('^(' + root + ')', '', file_path)
+def relpath(file_path, root="/"):
+    """Returns path relative to start"""
+    fp = re.sub("^(" + root + ")", "", file_path)
     return fp
 
 
@@ -229,14 +222,14 @@ def normpath(file_path):
     # Consolidate redundant slashes and relative references
     fp = os.path.normpath(file_path)
     # Tapis filePaths should always be absolute
-    if not fp.startswith('/'):
-        fp = '/' + fp
+    if not fp.startswith("/"):
+        fp = "/" + fp
     # Strip trailing slash
-    fp = re.sub('(/)+$', '', fp)
+    fp = re.sub("(/)+$", "", fp)
     return os.path.normpath(fp)
 
 
-def abspath(file_path, root='/'):
+def abspath(file_path, root="/"):
     """Safely combine a relative (which might not actually
     be relative) and base path.
 
@@ -251,16 +244,15 @@ def abspath(file_path, root='/'):
 
 
 def splitall(path):
-    """Splits a path into all of its parts
-    """
+    """Splits a path into all of its parts"""
     # Ref: https://www.oreilly.com/library/view/python-cookbook/0596001673/ch04s16.html
     allparts = []
     while 1:
         parts = os.path.split(path)
-        if parts[0] == path:    # sentinel for absolute paths
+        if parts[0] == path:  # sentinel for absolute paths
             allparts.insert(0, parts[0])
             break
-        elif parts[1] == path:    # sentinel for relative paths
+        elif parts[1] == path:  # sentinel for relative paths
             allparts.insert(0, parts[1])
             break
         else:
@@ -271,22 +263,26 @@ def splitall(path):
 
 # Inspired by https://gist.github.com/moird/3684595
 def humanize_bytes(bytesize, precision=2):
-    """Render byte counts into human-scale formats
-    """
-    abbrevs = ((1 << 50, 'PB'), (1 << 40, 'TB'), (1 << 30, 'GB'),
-               (1 << 20, 'MB'), (1 << 10, 'kB'), (1, 'bytes'))
+    """Render byte counts into human-scale formats"""
+    abbrevs = (
+        (1 << 50, "PB"),
+        (1 << 40, "TB"),
+        (1 << 30, "GB"),
+        (1 << 20, "MB"),
+        (1 << 10, "kB"),
+        (1, "bytes"),
+    )
     if bytesize == 1:
-        return '1 byte'
+        return "1 byte"
     for factor, suffix in abbrevs:
         if bytesize >= factor:
             break
-    return '%.*f %s' % (precision, bytesize / factor, suffix)
+    return "%.*f %s" % (precision, bytesize / factor, suffix)
 
 
 def print_stderr(message):
-    """Print to STDERR without using logging
-    """
-    print('{0}'.format(message), file=sys.stderr)
+    """Print to STDERR without using logging"""
+    print("{0}".format(message), file=sys.stderr)
 
 
 def fnmatches(file_name, patterns=None):
@@ -304,8 +300,7 @@ def fnmatches(file_name, patterns=None):
 
 
 def serializable(obj, permissive=True):
-    """Check that a Python object is JSON serializable
-    """
+    """Check that a Python object is JSON serializable"""
     try:
         json.loads(json.dumps(obj))
         return True
@@ -317,8 +312,7 @@ def serializable(obj, permissive=True):
 
 
 def makedirs(file_path, exist_ok=True):
-    """Python2-compatible makedirs with exist_ok support
-    """
+    """Python2-compatible makedirs with exist_ok support"""
     Path(file_path).mkdir(exist_ok=exist_ok, parents=True)
 
 
@@ -336,8 +330,7 @@ def dynamic_import(module, package=None):
 
 
 def import_submodules(module, package=None, exclude=[]):
-    """Dynamically discover and import submodules at runtime
-    """
+    """Dynamically discover and import submodules at runtime"""
     m = dynamic_import(module, package)
     paths = m.__path__
     real_path = [pt for pt in paths][0]
@@ -345,7 +338,7 @@ def import_submodules(module, package=None, exclude=[]):
     for c in os.listdir(real_path):
         try:
             if c not in exclude:
-                sm = dynamic_import(module + '.' + os.path.basename(c))
+                sm = dynamic_import(module + "." + os.path.basename(c))
                 submodules.append(sm)
         except ModuleNotFoundError:
             pass
@@ -355,18 +348,18 @@ def import_submodules(module, package=None, exclude=[]):
 # TODO - Add support for tapis:
 def parse_uri(url):
     # Agave URI
-    if url.startswith('agave://'):
-        url = url.replace('agave://', '', 1)
-        parts = url.split('/')
-        return parts[0], '/' + '/'.join(parts[1:])
+    if url.startswith("agave://"):
+        url = url.replace("agave://", "", 1)
+        parts = url.split("/")
+        return parts[0], "/" + "/".join(parts[1:])
     # Agave media URL
-    elif url.startswith('https://'):
-        url = url.replace('https://', '')
-        parts = url.split('/')
-        if parts[1] == 'files' and parts[3] == 'media':
-            return parts[5], '/'.join(parts[6:])
+    elif url.startswith("https://"):
+        url = url.replace("https://", "")
+        parts = url.split("/")
+        if parts[1] == "files" and parts[3] == "media":
+            return parts[5], "/".join(parts[6:])
     else:
-        raise ValueError('{0} not a valid Agave URL or URI'.format(url))
+        raise ValueError("{0} not a valid Agave URL or URI".format(url))
 
 
 def num(n):
@@ -377,43 +370,39 @@ def num(n):
 
 
 def to_slug(inp, lowercase=True):
-    """Implements Aloe Slugify.to_slug
-    """
+    """Implements Aloe Slugify.to_slug"""
     # https://bitbucket.org/tacc-cic/aloe/src/master/aloe-jobslib/src/main/java/edu/utexas/tacc/aloe/jobs/utils/Slug.java
     # Remove single quote characters
-    inp = re.sub("'", '', inp)
+    inp = re.sub("'", "", inp)
     # Remove non-ASCII characters
-    inp = re.sub(r'[^\x00-\x7F]', '', inp)
+    inp = re.sub(r"[^\x00-\x7F]", "", inp)
     # Whitespace characters reduced to single -
-    inp = re.sub('[\s]+', '-', inp)
-    inp = re.sub('[^a-zA-Z0-9_]+', '-', inp)
-    inp = re.sub('[-]+', '-', inp)
-    inp = re.sub('^-', '', inp)
-    inp = re.sub('-$', '', inp)
+    inp = re.sub("[\s]+", "-", inp)
+    inp = re.sub("[^a-zA-Z0-9_]+", "-", inp)
+    inp = re.sub("[-]+", "-", inp)
+    inp = re.sub("^-", "", inp)
+    inp = re.sub("-$", "", inp)
     if lowercase:
         inp = inp.lower()
     return inp
 
 
-def split_string(inp, separator=','):
-    """Split and de-whitespace delimited string
-    """
+def split_string(inp, separator=","):
+    """Split and de-whitespace delimited string"""
     els = str(inp).split(separator)
     els = [e.strip() for e in els]
     return els
 
 
 def nrlist(sequence):
-    """Python 2.7 compatible list deduplication
-    """
+    """Python 2.7 compatible list deduplication"""
     unique = []
     [unique.append(item) for item in sequence if item not in unique]
     return unique
 
 
-def slugify(text, separator='_'):
-    """Implements a stable slugify function over python-slugify, unicode-slugify, or awesome-slugify
-    """
+def slugify(text, separator="_"):
+    """Implements a stable slugify function over python-slugify, unicode-slugify, or awesome-slugify"""
     try:
         # Preferred: python-slugify (https://github.com/un33k/python-slugify)
         # [This usage also works for awesome-slugify (https://github.com/voronind/awesome-slugify)]
@@ -422,15 +411,16 @@ def slugify(text, separator='_'):
     except TypeError:
         try:
             # Fall back to unicode-slugify (https://github.com/mozilla/unicode-slugify)
-            return slugifyfn(text, ok='_-', spaces=False,
-                             lower=True).replace('-', separator)
+            return slugifyfn(text, ok="_-", spaces=False, lower=True).replace(
+                "-", separator
+            )
         except Exception:
             raise
     except Exception:
         raise
 
 
-def flatten(d, parent_key='', sep='.'):
+def flatten(d, parent_key="", sep="."):
     items = []
     for k, v in d.items():
         new_key = parent_key + sep + k if parent_key else k

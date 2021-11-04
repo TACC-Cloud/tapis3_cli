@@ -15,7 +15,12 @@ docs-autodoc:
 docs-clean:
 	cd docs && make clean
 
+lint-source:
+	pylint tapis3_cli
+
+lint: lint-source
+
 reformat-source:
-	yapf -i --recursive tapis3_cli
+	black tapis3_cli
 
 reformat: reformat-source

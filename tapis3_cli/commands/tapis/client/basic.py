@@ -6,7 +6,7 @@ from tapipy.tapis import Tapis
 import warnings
 from .filter import TapisResultsDisplay
 
-__all__ = ['BasicAuthFormatOne', 'BasicAuthFormatMany', 'BasicAuthCommon']
+__all__ = ["BasicAuthFormatOne", "BasicAuthFormatMany", "BasicAuthCommon"]
 
 
 class BasicAuthCommon(FormatNone, TapisResultsDisplay):
@@ -16,24 +16,24 @@ class BasicAuthCommon(FormatNone, TapisResultsDisplay):
 
     def add_common_arguments(self, parser):
 
-        g = parser.add_argument_group('authentication options')
+        g = parser.add_argument_group("authentication options")
 
-        g.add_argument('-H',
-                       '--base-url',
-                       dest='base_url',
-                       type=str,
-                       metavar='URL',
-                       help="Tapis Base URL")
+        g.add_argument(
+            "-H",
+            "--base-url",
+            dest="base_url",
+            type=str,
+            metavar="URL",
+            help="Tapis Base URL",
+        )
 
-        g.add_argument('--username',
-                       type=str,
-                       metavar='username',
-                       help="Tapis Username")
+        g.add_argument(
+            "--username", type=str, metavar="username", help="Tapis Username"
+        )
 
-        g.add_argument('--password',
-                       type=str,
-                       metavar='password',
-                       help="Tapis Password")
+        g.add_argument(
+            "--password", type=str, metavar="password", help="Tapis Password"
+        )
 
         return parser
 
@@ -47,9 +47,11 @@ class BasicAuthCommon(FormatNone, TapisResultsDisplay):
 
         This should be called at the top of take_action()
         """
-        self.tapis3_client = TapisLocalCache(base_url=parsed_args.base_url,
-                                             username=parsed_args.username,
-                                             password=parsed_args.password)
+        self.tapis3_client = TapisLocalCache(
+            base_url=parsed_args.base_url,
+            username=parsed_args.username,
+            password=parsed_args.password,
+        )
         try:
             self.tapis3_client.get_tokens()
             # self.tapis3_client.refresh_tokens()

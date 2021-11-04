@@ -3,8 +3,8 @@ from ...mixins import LimitsArgs
 
 
 class AliasesList(Oauth2FormatMany, LimitsArgs):
-    """List Aliases.
-    """
+    """List Aliases."""
+
     def get_parser(self, prog_name):
         parser = super(AliasesList, self).get_parser(prog_name)
         # TODO - reenable this once limit and offset are supported by V3 Abaco

@@ -1,6 +1,6 @@
 import requests
 
-__all__ = ['TapisDirectClient']
+__all__ = ["TapisDirectClient"]
 
 
 class TapisDirectClient(object):
@@ -16,7 +16,7 @@ class TapisDirectClient(object):
         # token = tapis_client.token.token_info['access_token']
         # Always refresh when using a requests call
         token = tapis_client.access_token.access_token
-        self.user_agent = 'TapisDirectClient/1.0'
+        self.user_agent = "TapisDirectClient/1.0"
         self.api_server = tapis_client.base_url
         self.api_key = tapis_client.client_id
         self.api_secret = tapis_client.client_key
@@ -24,15 +24,15 @@ class TapisDirectClient(object):
         self.service_name = None
         self.service_version = None
         self.api_path = None
-        self.headers = {'user-agent': self.user_agent}
+        self.headers = {"user-agent": self.user_agent}
         # Only send Bearer if token is provided
         if token:
-            self.headers['X-Tapis-Token'] = '{}'.format(token)
+            self.headers["X-Tapis-Token"] = "{}".format(token)
 
-    def setup(self, service_name, service_version='v3', api_path=None):
-        setattr(self, 'service_version', service_version)
-        setattr(self, 'service_name', service_name)
-        setattr(self, 'api_path', api_path)
+    def setup(self, service_name, service_version="v3", api_path=None):
+        setattr(self, "service_version", service_version)
+        setattr(self, "service_name", service_name)
+        setattr(self, "api_path", api_path)
 
     def build_url(self, *args):
         arg_els = args
@@ -43,7 +43,7 @@ class TapisDirectClient(object):
         url_path_els = [self.api_server]
         url_path_els.extend(path_els)
         url_path_els = [u for u in url_path_els if u is not None]
-        return '/'.join(url_path_els)
+        return "/".join(url_path_els)
 
     def get(self, path=None):
         url = self.build_url(path)
@@ -51,7 +51,7 @@ class TapisDirectClient(object):
         # show_curl(resp, verify=self.verify)
         resp = self._raise_for_status(resp)
         #        resp.raise_for_status()
-        return resp.json().get('result', {})
+        return resp.json().get("result", {})
 
     def delete(self, path=None):
         url = self.build_url(path)
@@ -59,7 +59,7 @@ class TapisDirectClient(object):
         # show_curl(resp, verify=self.verify)
         resp = self._raise_for_status(resp)
         #        resp.raise_for_status()
-        return resp.json().get('result', {})
+        return resp.json().get("result", {})
 
     def get_bytes(self, path=None):
         url = self.build_url(path)
@@ -71,31 +71,27 @@ class TapisDirectClient(object):
 
     def get_data(self, path=None, params={}):
         url = self.build_url(path)
-        resp = requests.get(url,
-                            headers=self.headers,
-                            params=params,
-                            verify=self.verify)
+        resp = requests.get(
+            url, headers=self.headers, params=params, verify=self.verify
+        )
         # show_curl(resp, verify=self.verify)
         resp = self._raise_for_status(resp)
         #        resp.raise_for_status()
-        return resp.json().get('result', {})
+        return resp.json().get("result", {})
 
-    def post(self,
-             path=None,
-             data=None,
-             content_type=None,
-             json=None,
-             params=None):
+    def post(self, path=None, data=None, content_type=None, json=None, params=None):
         url = self.build_url(path)
         post_headers = self.headers
         if content_type is not None:
-            post_headers['Content-type'] = content_type
-        resp = requests.post(url,
-                             data=data,
-                             headers=post_headers,
-                             params=params,
-                             json=json,
-                             verify=self.verify)
+            post_headers["Content-type"] = content_type
+        resp = requests.post(
+            url,
+            data=data,
+            headers=post_headers,
+            params=params,
+            json=json,
+            verify=self.verify,
+        )
         # show_curl(resp, verify=self.verify)
         resp = self._raise_for_status(resp)
 
@@ -106,28 +102,22 @@ class TapisDirectClient(object):
         # appropriate response. If there is no JSON available at all,
         # return the response body as bytes.
         try:
-            result = resp.json().get('result', resp.json().get('message', {}))
+            result = resp.json().get("result", resp.json().get("message", {}))
         except JSONDecodeError:
             result = resp.content
         return result
 
-    def post_data_basic(self,
-                        data=None,
-                        auth=None,
-                        path=None,
-                        content_type=None):
+    def post_data_basic(self, data=None, auth=None, path=None, content_type=None):
         url = self.build_url(path)
-        post_headers = {'user-agent': self.user_agent}
+        post_headers = {"user-agent": self.user_agent}
         if content_type is not None:
-            post_headers['Content-type'] = content_type
+            post_headers["Content-type"] = content_type
         if auth is None:
             auth = (self.api_key, self.api_secret)
 
-        resp = requests.post(url,
-                             headers=post_headers,
-                             auth=auth,
-                             data=data,
-                             verify=self.verify)
+        resp = requests.post(
+            url, headers=post_headers, auth=auth, data=data, verify=self.verify
+        )
         # show_curl(resp, verify=self.verify)
 
         resp = self._raise_for_status(resp)
@@ -141,8 +131,7 @@ class TapisDirectClient(object):
         return resp.json()
 
     def _raise_for_status(self, resp):
-        """Handler for requests raise_for_status to capture message from API server responses
-        """
+        """Handler for requests raise_for_status to capture message from API server responses"""
         try:
             resp.raise_for_status()
         except requests.exceptions.HTTPError as h:
@@ -150,16 +139,14 @@ class TapisDirectClient(object):
                 # Extract the API JSON message and attach it
                 # to the HTTPError object before raising it
                 code = h.response.status_code
-                reason = h.response.reason + ' for ' + h.response.url
+                reason = h.response.reason + " for " + h.response.url
                 try:
-                    message = h.response.json().get('message')
+                    message = h.response.json().get("message")
                 except Exception:
                     message = h.response.text
-                raise requests.exceptions.HTTPError(code,
-                                                    reason,
-                                                    message,
-                                                    response=h.response,
-                                                    request=h.request)
+                raise requests.exceptions.HTTPError(
+                    code, reason, message, response=h.response, request=h.request
+                )
             else:
                 raise h
         return resp

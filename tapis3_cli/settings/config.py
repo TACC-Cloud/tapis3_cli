@@ -5,34 +5,32 @@ import warnings
 
 from dotenv import find_dotenv, load_dotenv
 
-__all__ = ['find_config', 'load_config', 'TAPIS3_CLI_CONFIG_DIR']
+__all__ = ["find_config", "load_config", "TAPIS3_CLI_CONFIG_DIR"]
 
-TAPIS3_CLI_CONFIG_DIRNAME = '.tapis3'
-TAPIS3_CLI_CONFIG_FILE = os.environ.get('TAPIS3_CLI_CONFIG_FILE', 'config')
+TAPIS3_CLI_CONFIG_DIRNAME = ".tapis3"
+TAPIS3_CLI_CONFIG_FILE = os.environ.get("TAPIS3_CLI_CONFIG_FILE", "config")
 TAPIS3_CLI_CONFIG_DIR = os.environ.get(
-    'TAPIS3_CLI_CONFIG_DIR',
-    os.path.join(os.path.expanduser('~'), TAPIS3_CLI_CONFIG_DIRNAME))
+    "TAPIS3_CLI_CONFIG_DIR",
+    os.path.join(os.path.expanduser("~"), TAPIS3_CLI_CONFIG_DIRNAME),
+)
 
 
 def config_directory():
-    """Return the path to the CLI configs directory
-    """
+    """Return the path to the CLI configs directory"""
     return TAPIS3_CLI_CONFIG_DIR
 
 
 def config_file():
-    """Return the path to the CLI configs directory
-    """
+    """Return the path to the CLI configs directory"""
     return TAPIS3_CLI_CONFIG_FILE
 
 
 def find_config(filename=None):
-    """Wrapper for find_dotenv that searches module path, CWD, and HOME
-    """
+    """Wrapper for find_dotenv that searches module path, CWD, and HOME"""
     if filename is None:
         filename = config_file()
     with warnings.catch_warnings():
-        warnings.simplefilter('ignore')
+        warnings.simplefilter("ignore")
         confdir = config_directory()
         if not os.path.isdir(confdir):
             os.makedirs(confdir, exist_ok=True)
@@ -48,13 +46,12 @@ def find_config(filename=None):
 
 
 def load_config(filename=None, override=False):
-    """Wrapper for load_env that considers module path, CWD, and HOME
-    """
+    """Wrapper for load_env that considers module path, CWD, and HOME"""
     if filename is None:
         filename = config_file()
     abs_file_name = find_config(filename)
     with warnings.catch_warnings():
-        warnings.simplefilter('ignore')
+        warnings.simplefilter("ignore")
 
         # Load into environment
         try:

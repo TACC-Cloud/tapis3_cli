@@ -1,28 +1,27 @@
-__all__ = ['TapisResultsDisplay']
+__all__ = ["TapisResultsDisplay"]
 
 
 class TapisResultsDisplay(object):
-    """Adds interpretation and filtering of TapisResults
-    """
+    """Adds interpretation and filtering of TapisResults"""
 
     DISPLAY_FIELDS = []
 
     def _formatter(self, parsed_args=None):
         if parsed_args is None:
-            return 'table'
+            return "table"
         else:
-            return getattr(parsed_args, 'formatter', 'table')
+            return getattr(parsed_args, "formatter", "table")
 
     def filter_record_dict(self, record, parsed_args=None):
 
         if not isinstance(record, dict):
             record = record.__dict__
 
-        if self._formatter(parsed_args) != 'table':
+        if self._formatter(parsed_args) != "table":
             return record
         elif len(self.DISPLAY_FIELDS) == 0:
             # Some fields, like '_links', never make sense to show interactively
-            NEVER_DISPLAY_IN_TABLE = ['_links']
+            NEVER_DISPLAY_IN_TABLE = ["_links"]
             for k in NEVER_DISPLAY_IN_TABLE:
                 try:
                     del record[k]

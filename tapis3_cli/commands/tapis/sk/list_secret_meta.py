@@ -3,9 +3,9 @@ from .common import SKCommonArgs
 
 
 class SecretsList(Oauth2FormatOne, SKCommonArgs):
-    """List user Secrets.
-    """
-    DISPLAY_FIELDS = ['keys', 'secretPath']
+    """List user Secrets."""
+
+    DISPLAY_FIELDS = ["keys", "secretPath"]
 
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
@@ -19,7 +19,8 @@ class SecretsList(Oauth2FormatOne, SKCommonArgs):
         resp = self.tapis3_client.sk.listSecretMeta(
             secretType=self.secret_type,
             user=self.secret_user,
-            tenant=self.secret_tenant)
+            tenant=self.secret_tenant,
+        )
 
         headers = self.DISPLAY_FIELDS
         data = [resp.get(h) for h in self.DISPLAY_FIELDS]

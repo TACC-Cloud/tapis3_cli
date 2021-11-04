@@ -3,11 +3,9 @@ from ...mixins import LimitsArgs
 
 
 class ActorsList(Oauth2FormatMany, LimitsArgs):
-    """List Actors.
-    """
-    DISPLAY_FIELDS = [
-        'id', 'name', 'owner', 'image', 'lastUpdateTime', 'status'
-    ]
+    """List Actors."""
+
+    DISPLAY_FIELDS = ["id", "name", "owner", "image", "lastUpdateTime", "status"]
 
     def get_parser(self, prog_name):
         parser = super(ActorsList, self).get_parser(prog_name)

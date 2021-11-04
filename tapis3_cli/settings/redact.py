@@ -3,16 +3,15 @@
 
 import re
 
-__all__ = ['key_is_private', 'auto_redact', 'redact']
+__all__ = ["key_is_private", "auto_redact", "redact"]
 
-PRIVATE_TOKENS = ['password', 'token', 'secret', 'key']
-PRIVATE_RE = re.compile('|'.join(PRIVATE_TOKENS), re.IGNORECASE)
-REDACT_CHAR = '*'
+PRIVATE_TOKENS = ["password", "token", "secret", "key"]
+PRIVATE_RE = re.compile("|".join(PRIVATE_TOKENS), re.IGNORECASE)
+REDACT_CHAR = "*"
 
 
 def key_is_private(key):
-    """Determine if a key has a name indicating it is private
-    """
+    """Determine if a key has a name indicating it is private"""
     if PRIVATE_RE.search(key):
         return True
     else:
@@ -29,8 +28,7 @@ def redact(value):
 
 
 def auto_redact(key, value):
-    """Automatically redact values of private settings
-    """
+    """Automatically redact values of private settings"""
     if value is None:
         return None
     else:

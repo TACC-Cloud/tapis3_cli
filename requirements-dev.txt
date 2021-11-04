@@ -1,3 +1,5 @@
+black
+pylint
 flake8
 pytest==4.6.5 # pinned for Python 2.7.x support
 pytest-cov

@@ -11,8 +11,16 @@ class Status(Command):
     log = logging.getLogger(__name__)
 
     def take_action(self, parsed_args):
-        self.app.stdout.write('\n'.join([
-            'Abaco: Operational', 'Agave: Operational', 'Aloe: Operational',
-            'Gitlab: Operational', 'Keys: Operational',
-            'Registry: Operational', 'TAS: Operational'
-        ]))
+        self.app.stdout.write(
+            "\n".join(
+                [
+                    "Abaco: Operational",
+                    "Agave: Operational",
+                    "Aloe: Operational",
+                    "Gitlab: Operational",
+                    "Keys: Operational",
+                    "Registry: Operational",
+                    "TAS: Operational",
+                ]
+            )
+        )

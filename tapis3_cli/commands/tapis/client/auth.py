@@ -6,7 +6,7 @@ from tapis3_cli.cache.client import TapisLocalCache
 from tapipy.tapis import Tapis
 from .filter import TapisResultsDisplay
 
-__all__ = ['Oauth2Common', 'Oauth2FormatOne', 'Oauth2FormatMany']
+__all__ = ["Oauth2Common", "Oauth2FormatOne", "Oauth2FormatMany"]
 
 
 class Oauth2Common(FormatNone, TapisResultsDisplay):
@@ -20,39 +20,43 @@ class Oauth2Common(FormatNone, TapisResultsDisplay):
         # configuration -C, --ccnfig [default]
         # base URL -H --base-url [https://tacc.tapis.io]
         # access_token -Z, --token
-        g = parser.add_argument_group('authentication options')
+        g = parser.add_argument_group("authentication options")
 
-        g.add_argument('-C',
-                       '--client',
-                       dest='client',
-                       default=TAPIS3_CLI_CLIENT_FILE,
-                       type=str,
-                       metavar='str',
-                       help="Tapis client config")
+        g.add_argument(
+            "-C",
+            "--client",
+            dest="client",
+            default=TAPIS3_CLI_CLIENT_FILE,
+            type=str,
+            metavar="str",
+            help="Tapis client config",
+        )
 
-        g.add_argument('-H',
-                       '--base-url',
-                       dest='base_url',
-                       type=str,
-                       metavar='URL',
-                       help="Tapis Base URL")
+        g.add_argument(
+            "-H",
+            "--base-url",
+            dest="base_url",
+            type=str,
+            metavar="URL",
+            help="Tapis Base URL",
+        )
 
-        g.add_argument('-Z',
-                       '--token',
-                       dest='access_token',
-                       type=str,
-                       metavar='token',
-                       help="Tapis Access Token")
+        g.add_argument(
+            "-Z",
+            "--token",
+            dest="access_token",
+            type=str,
+            metavar="token",
+            help="Tapis Access Token",
+        )
 
-        g.add_argument('--username',
-                       type=str,
-                       metavar='username',
-                       help="Tapis Username")
+        g.add_argument(
+            "--username", type=str, metavar="username", help="Tapis Username"
+        )
 
-        g.add_argument('--password',
-                       type=str,
-                       metavar='password',
-                       help="Tapis Password")
+        g.add_argument(
+            "--password", type=str, metavar="password", help="Tapis Password"
+        )
 
         return parser
 
@@ -68,22 +72,24 @@ class Oauth2Common(FormatNone, TapisResultsDisplay):
         """
         # Did user provide an override?
         # URL and token
-        if (parsed_args.base_url is not None
-                and parsed_args.access_token is not None):
+        if parsed_args.base_url is not None and parsed_args.access_token is not None:
+            self.tapis3_client = TapisLocalCache(
+                base_url=parsed_args.base_url, access_token=parsed_args.access_token
+            )
+        # URL username password
+        elif (
+            parsed_args.base_url is not None
+            and parsed_args.username is not None
+            and parsed_args.password is not None
+        ):
             self.tapis3_client = TapisLocalCache(
                 base_url=parsed_args.base_url,
-                access_token=parsed_args.access_token)
-        # URL username password
-        elif (parsed_args.base_url is not None
-              and parsed_args.username is not None
-              and parsed_args.password is not None):
-            self.tapis3_client = TapisLocalCache(base_url=parsed_args.base_url,
-                                                 username=parsed_args.username,
-                                                 password=parsed_args.password)
+                username=parsed_args.username,
+                password=parsed_args.password,
+            )
         # TODO - support passing base_url and nonce
         else:
-            self.tapis3_client = TapisLocalCache.restore(
-                cache=parsed_args.client)
+            self.tapis3_client = TapisLocalCache.restore(cache=parsed_args.client)
             self.tapis3_client.get_tokens()
 
     # def filter_record_dict(self, record, formatter='table'):

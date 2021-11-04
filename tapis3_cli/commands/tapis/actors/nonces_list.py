@@ -4,22 +4,18 @@ from ...mixins import LimitsArgs, StringIdentifier
 
 
 class NoncesList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
-    """List Nonces for an Actor.
-    """
-    DISPLAY_FIELDS = [
-        'actorId', 'id', 'lastUseTime', 'level', 'remainingUses', 'owner'
-    ]
+    """List Nonces for an Actor."""
+
+    DISPLAY_FIELDS = ["actorId", "id", "lastUseTime", "level", "remainingUses", "owner"]
 
     def get_parser(self, prog_name):
         parser = super(NoncesList, self).get_parser(prog_name)
-        parser = super().add_identifier(parser,
-                                        name='Actor ID or Alias',
-                                        destination='actor_id',
-                                        optional=False)
-        parser.add_argument('-A',
-                            dest='is_alias',
-                            action='store_true',
-                            help='Identifier is an Alias')
+        parser = super().add_identifier(
+            parser, name="Actor ID or Alias", destination="actor_id", optional=False
+        )
+        parser.add_argument(
+            "-A", dest="is_alias", action="store_true", help="Identifier is an Alias"
+        )
         # TODO - reenable this once limit and offset are supported by V3 Abaco
         # parser = LimitsArgs.extend_parser(self, parser)
         return parser
@@ -28,11 +24,11 @@ class NoncesList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
         super(NoncesList, self).take_action(parsed_args)
         self.load_client(parsed_args)
         self.config = {}
-        self.config['actor_id'] = parsed_args.actor_id
+        self.config["actor_id"] = parsed_args.actor_id
         if parsed_args.is_alias:
             requests_client = TapisDirectClient(self.tapis3_client)
-            api_path = 'aliases/' + self.config['actor_id'] + '/nonces'
-            requests_client.setup('actors', api_path=api_path)
+            api_path = "aliases/" + self.config["actor_id"] + "/nonces"
+            requests_client.setup("actors", api_path=api_path)
             resp = requests_client.get()
         else:
             resp = self.tapis3_client.actors.listNonces(**self.config)

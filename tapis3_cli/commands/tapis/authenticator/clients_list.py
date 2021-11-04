@@ -2,11 +2,9 @@ from ..client import BasicAuthFormatMany
 
 
 class ClientsList(BasicAuthFormatMany):
-    """List available Tapis Oauth2 clients.
-    """
-    DISPLAY_FIELDS = [
-        'client_id', 'create_time', 'description', 'display_name'
-    ]
+    """List available Tapis Oauth2 clients."""
+
+    DISPLAY_FIELDS = ["client_id", "create_time", "description", "display_name"]
 
     def take_action(self, parsed_args):
         self.load_client(parsed_args)

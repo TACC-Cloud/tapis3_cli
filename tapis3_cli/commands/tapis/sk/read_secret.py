@@ -1,13 +1,13 @@
 from ..client import Oauth2FormatOne
+
 # from ...mixins import JSONArg
 from .common import SKCommonArgs, SKSecretNameArg, SKSecretJSONFileArg
 
 
-class SecretsRead(Oauth2FormatOne, SKCommonArgs, SKSecretNameArg,
-                  SKSecretJSONFileArg):
-    """Read a user Secret.
-    """
-    DISPLAY_FIELDS = ['secretMap']
+class SecretsRead(Oauth2FormatOne, SKCommonArgs, SKSecretNameArg, SKSecretJSONFileArg):
+    """Read a user Secret."""
+
+    DISPLAY_FIELDS = ["secretMap"]
 
     # TODO - Let user can retrieve either whole secret as dict-like or individual entries in secretMap
     # TODO - Make disiplay of secret metadata optional via --metadata flag
@@ -22,10 +22,12 @@ class SecretsRead(Oauth2FormatOne, SKCommonArgs, SKSecretNameArg,
         self.process_secret_common_args(parsed_args)
         secret_name = parsed_args.secret_name
 
-        resp = self.tapis3_client.sk.readSecret(secretType=self.secret_type,
-                                                user=self.secret_user,
-                                                tenant=self.secret_tenant,
-                                                secretName=secret_name)
+        resp = self.tapis3_client.sk.readSecret(
+            secretType=self.secret_type,
+            user=self.secret_user,
+            tenant=self.secret_tenant,
+            secretName=secret_name,
+        )
 
         headers = self.DISPLAY_FIELDS
         data = [resp.get(h) for h in self.DISPLAY_FIELDS]

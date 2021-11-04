@@ -2,11 +2,9 @@ from ..client import Oauth2FormatMany
 
 
 class ViewsList(Oauth2FormatMany):
-    """List Views (requires views admin role).
-    """
-    DISPLAY_FIELDS = [
-        'view_name', 'root_url', 'view_id', 'manage_view_id', 'comments'
-    ]
+    """List Views (requires views admin role)."""
+
+    DISPLAY_FIELDS = ["view_name", "root_url", "view_id", "manage_view_id", "comments"]
 
     def take_action(self, parsed_args):
 

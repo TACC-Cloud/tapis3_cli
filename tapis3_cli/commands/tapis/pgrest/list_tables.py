@@ -2,9 +2,9 @@ from ..client import Oauth2FormatMany
 
 
 class TablesList(Oauth2FormatMany):
-    """List Tables (requires table admin role).
-    """
-    DISPLAY_FIELDS = ['table_name', 'root_url', 'table_id', 'comments']
+    """List Tables (requires table admin role)."""
+
+    DISPLAY_FIELDS = ["table_name", "root_url", "table_id", "comments"]
 
     def take_action(self, parsed_args):
 

@@ -6,12 +6,12 @@ from cliff.command import Command
 from cliff.lister import Lister
 from cliff.show import ShowOne
 
-__all__ = ['FormatOne', 'FormatMany', 'FormatNone']
+__all__ = ["FormatOne", "FormatMany", "FormatNone"]
 
 
 class FormatNone(Command):
-    """Unformatted command
-    """
+    """Unformatted command"""
+
     log = logging.getLogger(__name__)
 
     def get_parser(self, prog_name):
@@ -23,8 +23,8 @@ class FormatNone(Command):
 
 
 class FormatOne(ShowOne):
-    """Generic Record Display
-    """
+    """Generic Record Display"""
+
     log = logging.getLogger(__name__)
 
     def get_parser(self, prog_name):
@@ -36,8 +36,7 @@ class FormatOne(ShowOne):
 
 
 class FormatMany(Lister):
-    """Generic Records Listing
-    """
+    """Generic Records Listing"""
 
     log = logging.getLogger(__name__)
 

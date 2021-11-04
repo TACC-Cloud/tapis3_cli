@@ -1,13 +1,13 @@
 from ..client import Oauth2FormatOne
+
 # from ...mixins import JSONArg
 from .common import SKCommonArgs, SKSecretNameArg, SKSecretJSONFileArg
 
 
-class SecretsWrite(Oauth2FormatOne, SKCommonArgs, SKSecretNameArg,
-                   SKSecretJSONFileArg):
-    """Write a user Secret.
-    """
-    DISPLAY_FIELDS = ['created_time', 'deletion_time', 'destroyed', 'version']
+class SecretsWrite(Oauth2FormatOne, SKCommonArgs, SKSecretNameArg, SKSecretJSONFileArg):
+    """Write a user Secret."""
+
+    DISPLAY_FIELDS = ["created_time", "deletion_time", "destroyed", "version"]
 
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
@@ -26,13 +26,15 @@ class SecretsWrite(Oauth2FormatOne, SKCommonArgs, SKSecretNameArg,
         self.process_secret_common_args(parsed_args)
 
         secret_name = parsed_args.secret_name
-        secret_data = self.get_file_data(parsed_args, destination='json_arg')
+        secret_data = self.get_file_data(parsed_args, destination="json_arg")
 
-        resp = self.tapis3_client.sk.writeSecret(secretType=self.secret_type,
-                                                 user=self.secret_user,
-                                                 tenant=self.secret_tenant,
-                                                 secretName=secret_name,
-                                                 data=secret_data)
+        resp = self.tapis3_client.sk.writeSecret(
+            secretType=self.secret_type,
+            user=self.secret_user,
+            tenant=self.secret_tenant,
+            secretName=secret_name,
+            data=secret_data,
+        )
 
         headers = self.DISPLAY_FIELDS
         data = [resp.get(h) for h in self.DISPLAY_FIELDS]

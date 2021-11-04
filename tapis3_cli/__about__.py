@@ -4,26 +4,34 @@ import os.path
 import re
 from pkg_resources import get_distribution
 
-MAPPINGS = [('Name', 'title'), ('Summary', 'summary'), ('Home_page', 'uri'),
-            ('Author', 'author'), ('Author_email', 'email'),
-            ('Maintainer_email', 'help')]
+MAPPINGS = [
+    ("Name", "title"),
+    ("Summary", "summary"),
+    ("Home_page", "uri"),
+    ("Author", "author"),
+    ("Author_email", "email"),
+    ("Maintainer_email", "help"),
+]
 
-OTHERS = [('Copyright', '2021 Texas Advanced Computing Center'),
-          ('License', 'BSD-3'), ('Project', 'Tapis v3 CLI')]
+OTHERS = [
+    ("Copyright", "2021 Texas Advanced Computing Center"),
+    ("License", "BSD-3"),
+    ("Project", "Tapis v3 CLI"),
+]
 
-__all__ = ['About']
+__all__ = ["About"]
 
 
 class About(object):
-    def __init__(self, name='tapis3_cli'):
+    def __init__(self, name="tapis3_cli"):
         # Read from setup.cfg [metadata]
         dst = get_distribution(name)
         lines = dst.get_metadata_lines(dst.PKG_INFO)
         found = list()
         for line in lines:
             for metadata_name, attribute in MAPPINGS:
-                if re.match('{}:'.format(metadata_name), line):
-                    name, value = line.split(':', 1)
+                if re.match("{}:".format(metadata_name), line):
+                    name, value = line.split(":", 1)
                     setattr(self, attribute, value.strip())
                     found.append(metadata_name)
                     break

@@ -1,11 +1,11 @@
 from .base import ActorsManage
 
-__all__ = ['ActorsCreate']
+__all__ = ["ActorsCreate"]
 
 
 class ActorsCreate(ActorsManage):
-    """Create an Actor
-    """
+    """Create an Actor"""
+
     DISPLAY_FIELDS = []
     CREATE_ONLY = True
 
