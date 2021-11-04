@@ -1,5 +1,5 @@
-from ..client import BasicAuthFormatOne
 from ...mixins import StringIdentifier
+from ..client import BasicAuthFormatOne
 
 
 class ClientsShow(BasicAuthFormatOne, StringIdentifier):

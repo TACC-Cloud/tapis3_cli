@@ -1,5 +1,5 @@
-from ..client import BasicAuthCommon
 from ...mixins import StringIdentifier
+from ..client import BasicAuthCommon
 
 
 class ClientsDelete(BasicAuthCommon, StringIdentifier):

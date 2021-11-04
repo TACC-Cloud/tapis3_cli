@@ -1,6 +1,7 @@
 import argparse
 import json
 import sys
+
 from .extender import ParserExtender
 
 __all__ = ["FileArg", "JSONArg"]

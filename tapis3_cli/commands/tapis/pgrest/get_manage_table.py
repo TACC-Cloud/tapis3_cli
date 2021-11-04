@@ -1,5 +1,5 @@
-from ..client import Oauth2FormatOne
 from ...mixins import StringIdentifier
+from ..client import Oauth2FormatOne
 
 
 class TablesShow(Oauth2FormatOne, StringIdentifier):

@@ -1,5 +1,5 @@
-from ..client import Oauth2FormatOne
 from ...mixins import StringIdentifier
+from ..client import Oauth2FormatOne
 
 __all__ = ["AliasesUpdate"]
 

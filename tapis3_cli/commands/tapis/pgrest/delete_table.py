@@ -1,5 +1,5 @@
-from ..client import Oauth2Common
 from ...mixins import StringIdentifier
+from ..client import Oauth2Common
 
 
 class TablesDelete(Oauth2Common, StringIdentifier):

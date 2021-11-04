@@ -1,9 +1,11 @@
 """Code for managing cached Tapis3 credentials
 """
 import datetime
-import os
 import json
+import os
+
 from tapipy.tapis import Tapis
+
 from tapis3_cli.settings.config import TAPIS3_CLI_CONFIG_DIR
 
 from . import direct

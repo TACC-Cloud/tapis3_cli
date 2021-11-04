@@ -1,5 +1,5 @@
-from tapis3_cli.formatters import FormatNone, FormatOne, FormatMany
+from tapis3_cli.formatters import FormatMany, FormatNone, FormatOne
 
-from .auth import Oauth2Common, Oauth2FormatOne, Oauth2FormatMany
-from .basic import BasicAuthCommon, BasicAuthFormatOne, BasicAuthFormatMany
-from .noauth import NoAuthCommon, NoAuthFormatOne, NoAuthFormatMany
+from .auth import Oauth2Common, Oauth2FormatMany, Oauth2FormatOne
+from .basic import BasicAuthCommon, BasicAuthFormatMany, BasicAuthFormatOne
+from .noauth import NoAuthCommon, NoAuthFormatMany, NoAuthFormatOne

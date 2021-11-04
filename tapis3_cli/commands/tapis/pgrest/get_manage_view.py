@@ -1,6 +1,7 @@
-from ..client import Oauth2FormatOne
-from ...mixins import StringIdentifier
 from tapis3_cli.utils import flatten
+
+from ...mixins import StringIdentifier
+from ..client import Oauth2FormatOne
 
 
 class ViewsShow(Oauth2FormatOne, StringIdentifier):

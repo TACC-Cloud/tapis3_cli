@@ -1,5 +1,5 @@
-from ..client import Oauth2FormatMany
 from ...mixins import LimitsArgs
+from ..client import Oauth2FormatMany
 
 
 class AliasesList(Oauth2FormatMany, LimitsArgs):

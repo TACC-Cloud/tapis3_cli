@@ -1,6 +1,7 @@
 from tapis3_cli.cache.client import TapisLocalCache
-from tapis3_cli.formatters import FormatNone, FormatOne, FormatMany
+from tapis3_cli.formatters import FormatMany, FormatNone, FormatOne
 from tapis3_cli.settings.auth import TAPIS3_CLI_CLIENT_FILE
+
 from .filter import TapisResultsDisplay
 
 __all__ = ["NoAuthCommon", "NoAuthFormatOne", "NoAuthFormatMany"]

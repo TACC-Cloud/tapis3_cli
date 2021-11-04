@@ -2,6 +2,7 @@
 """
 import os.path
 import re
+
 from pkg_resources import get_distribution
 
 MAPPINGS = [

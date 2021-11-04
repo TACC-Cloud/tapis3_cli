@@ -1,7 +1,7 @@
 """Settings-specfic mixins
 """
 
-from tapis3_cli.commands.mixins import StringIdentifier, InvalidIdentifier
+from tapis3_cli.commands.mixins import InvalidIdentifier, StringIdentifier
 from tapis3_cli.settings import all_settings
 
 __all__ = ["SettingName"]

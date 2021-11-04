@@ -1,6 +1,5 @@
+from ...mixins import LimitsArgs, StringIdentifier
 from ..client import Oauth2FormatMany
-from ...mixins import StringIdentifier
-from ...mixins import LimitsArgs
 
 
 class ViewsRowsList(Oauth2FormatMany, LimitsArgs, StringIdentifier):

@@ -3,8 +3,8 @@ import json
 
 from tapis3_cli.utils import nrlist, split_string
 
-from ...client import Oauth2FormatOne
 from ....mixins import StringIdentifier
+from ...client import Oauth2FormatOne
 
 __all__ = ["ActorsMessage"]
 

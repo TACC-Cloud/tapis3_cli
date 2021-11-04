@@ -1,5 +1,5 @@
-from ..client import Oauth2FormatOne
 from ...mixins import JSONArg
+from ..client import Oauth2FormatOne
 
 
 class TablesCreate(Oauth2FormatOne, JSONArg):

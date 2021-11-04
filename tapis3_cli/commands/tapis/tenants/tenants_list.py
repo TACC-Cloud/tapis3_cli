@@ -1,6 +1,7 @@
 from tapipy.tapis import Tapis
-from ..client import Oauth2FormatMany
+
 from ...mixins import StringIdentifier
+from ..client import Oauth2FormatMany
 
 
 class TenantIdentifier(StringIdentifier):

@@ -1,5 +1,5 @@
-from ..client import Oauth2FormatMany
 from ...mixins import LimitsArgs
+from ..client import Oauth2FormatMany
 
 
 class ActorsList(Oauth2FormatMany, LimitsArgs):

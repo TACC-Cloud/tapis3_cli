@@ -1,5 +1,5 @@
-from tapis3_cli.formatters import FormatMany
 from tapis3_cli import settings
+from tapis3_cli.formatters import FormatMany
 
 __all__ = ["SettingsList"]
 

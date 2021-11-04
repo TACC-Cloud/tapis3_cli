@@ -1,6 +1,7 @@
 import os
 
 from dotenv import set_key
+
 from tapis3_cli import settings
 from tapis3_cli.formatters import FormatOne
 

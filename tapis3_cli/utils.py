@@ -9,11 +9,11 @@ import json
 import os
 import re
 import sys
-import tapipy
 from pathlib import Path
 from socket import getfqdn
 
 import pkg_resources
+import tapipy
 from dateutil.parser import parse
 from requests import get
 from requests.exceptions import ConnectTimeout
