@@ -9,7 +9,8 @@ class StringIdentifier(ParserExtender):
                        name='Service Identifer',
                        destination='identifier',
                        metavar=None,
-                       optional=False):
+                       optional=False,
+                       multi=False):
 
         dest = destination.lower()
         python_type = str
@@ -19,7 +20,10 @@ class StringIdentifier(ParserExtender):
         else:
             arg_display = metavar
 
-        if optional:
+        if multi:
+            nargs = '+'
+            arg_help = '{0}'.format(name)
+        elif optional:
             nargs = '?'
             arg_help = 'Optional {0}'.format(name)
         else:

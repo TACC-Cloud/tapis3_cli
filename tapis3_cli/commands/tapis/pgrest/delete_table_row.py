@@ -18,15 +18,17 @@ class RowsDelete(Oauth2Common, StringIdentifier):
         parser = super().add_identifier(parser,
                                         name='Row ID',
                                         destination='_pkid',
-                                        optional=False)
+                                        metavar='ROW_ID',
+                                        optional=False,
+                                        multi=True)
         return parser
 
     def take_action(self, parsed_args):
 
         self.load_client(parsed_args)
         root_url = self.get_identifier(parsed_args, 'root_url')
-        pkid = self.get_identifier(parsed_args, '_pkid')
-
-        resp = self.tapis3_client.pgrest.delete_table_row(collection=root_url,
-                                                          item=pkid)
-        print(resp.get('message', None))
+        pkids = self.get_identifier(parsed_args, '_pkid')
+        for keyid in pkids:
+            resp = self.tapis3_client.pgrest.delete_table_row(collection=root_url,
+                                                              item=keyid)
+            print(resp.get('message', None))
