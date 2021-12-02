@@ -89,10 +89,6 @@ directly with the Abaco APIs via ``create``, ``update``, and
 .. autoprogram-cliff:: tapis3.cli
    :command: actors delete
 
-.. autoprogram-cliff:: tapis3.cli
-   :command: actors deploy
-
-
 Workers
 =======
 
@@ -105,3 +101,13 @@ messages.
 
 
 .. _Actors: https://tapis.readthedocs.io/en/latest/technical/actors.html
+
+
+******************
+Automated Workflow
+******************
+
+Automatically build and create or update an Actor using an ini file for configuration.
+
+.. autoprogram-cliff:: tapis3.cli
+   :command: actors deploy

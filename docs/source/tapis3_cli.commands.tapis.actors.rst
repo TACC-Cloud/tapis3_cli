@@ -12,6 +12,7 @@ Subpackages
 .. toctree::
    :maxdepth: 1
 
+   tapis3_cli.commands.tapis.actors.deploy
    tapis3_cli.commands.tapis.actors.manage
    tapis3_cli.commands.tapis.actors.message
 
@@ -30,6 +31,14 @@ tapis3\_cli.commands.tapis.actors.actors\_list module
 -----------------------------------------------------
 
 .. automodule:: tapis3_cli.commands.tapis.actors.actors_list
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tapis3\_cli.commands.tapis.actors.actors\_show module
+-----------------------------------------------------
+
+.. automodule:: tapis3_cli.commands.tapis.actors.actors_show
    :members:
    :undoc-members:
    :show-inheritance:

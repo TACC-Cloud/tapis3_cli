@@ -14,6 +14,7 @@ Subpackages
 
    tapis3_cli.cache
    tapis3_cli.commands
+   tapis3_cli.project_ini
    tapis3_cli.settings
 
 Submodules
