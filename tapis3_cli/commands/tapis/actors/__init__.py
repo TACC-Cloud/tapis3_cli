@@ -1,5 +1,6 @@
 from .actors_delete import ActorsDelete
 from .actors_list import ActorsList
+from .actors_show import ActorsShow
 from .aliases_create import AliasesCreate
 from .aliases_delete import AliasesDelete
 from .aliases_list import AliasesList
