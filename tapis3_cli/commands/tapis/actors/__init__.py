@@ -4,6 +4,7 @@ from .aliases_create import AliasesCreate
 from .aliases_delete import AliasesDelete
 from .aliases_list import AliasesList
 from .aliases_update import AliasesUpdate
+from .deploy import ActorsDeploy
 from .execs_list import ActorsExecsList
 from .execs_logs import ActorsExecsLogs
 from .manage import ActorsCreate, ActorsUpdate

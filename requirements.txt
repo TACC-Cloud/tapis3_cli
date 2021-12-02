@@ -3,3 +3,5 @@ tapipy>=1.0.1
 python-dotenv
 python-slugify
 prettytable
+docker<=4.2.0
+configparser

@@ -9,6 +9,7 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 from socket import getfqdn
 
@@ -29,6 +30,29 @@ def current_time():
         int(datetime.datetime.utcnow().timestamp() * 1000) / 1000
     )
 
+
+    return round(arrow.utcnow().float_timestamp * 1000)
+
+
+def seconds():
+    """Current time in seconds as ``int``
+    """
+    return round(time.time())
+
+def milliseconds():
+    """Current time in microseconds as ``int``
+    """
+    return round(time.time() * 1000)
+
+def microseconds():
+    """Current time in microseconds as ``int``
+    """
+    return round(time.time() * 1000 * 1000)
+
+def nanoseconds():
+    """Current time in nanoseconds as ``int``
+    """
+    return round(time.time() * 1000 * 1000 * 1000)
 
 def ts_to_isodate(date_string, include_time=False):
     """Convert a datetime string (UTC) into a date string in ISO format"""
