@@ -19,7 +19,7 @@ class AuthShow(NoAuthFormatOne):
             self.tapis3_client.tenant_id,
             self.tapis3_client.client_id,
             self.tapis3_client.client_key,
-            self.tapis3_client.access_token,
-            self.tapis3_client.refresh_token,
+            self.tapis3_client.access_token.access_token,
+            self.tapis3_client.refresh_token.refresh_token,
         ]
         return (headers, data)
