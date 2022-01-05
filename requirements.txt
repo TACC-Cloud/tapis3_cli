@@ -1,5 +1,5 @@
 cliff
-tapipy>=1.0.1
+tapipy==1.0.3
 python-dotenv
 python-slugify
 prettytable
