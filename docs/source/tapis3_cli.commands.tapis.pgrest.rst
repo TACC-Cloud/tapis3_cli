@@ -73,18 +73,18 @@ tapis3\_cli.commands.tapis.pgrest.get\_manage\_view module
    :undoc-members:
    :show-inheritance:
 
-tapis3\_cli.commands.tapis.pgrest.get\_table module
----------------------------------------------------
-
-.. automodule:: tapis3_cli.commands.tapis.pgrest.get_table
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 tapis3\_cli.commands.tapis.pgrest.get\_table\_row module
 --------------------------------------------------------
 
 .. automodule:: tapis3_cli.commands.tapis.pgrest.get_table_row
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tapis3\_cli.commands.tapis.pgrest.get\_table\_rows module
+---------------------------------------------------------
+
+.. automodule:: tapis3_cli.commands.tapis.pgrest.get_table_rows
    :members:
    :undoc-members:
    :show-inheritance:
