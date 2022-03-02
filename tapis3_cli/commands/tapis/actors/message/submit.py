@@ -12,14 +12,14 @@ class ActorsSubmit(ActorsMessage):
         super(ActorsSubmit, self).take_action(parsed_args)
         # NOTE: The OAPI spec says this is supposed to be request_body not message
         if isinstance(self.config["message"], dict):
-            method = self.tapis3_client.actors.sendMessage
+            method = self.tapis3_client.actors.send_message
             # NOTE: sendJSONMessage is listed in the OAPI spec but I don't know that works
             # method = self.tapis3_client.actors.sendJSONMessage
         elif isinstance(self.config["message"], str):
-            method = self.tapis3_client.actors.sendMessage
+            method = self.tapis3_client.actors.send_message
         else:
             # Placeholder for BinaryMessage
-            method = self.tapis3_client.actors.sendBinaryMessage
+            method = self.tapis3_client.actors.send_binary_message
 
         resp = method(**self.config)
 

@@ -32,7 +32,7 @@ class NoncesList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
             requests_client.setup("actors", api_path=api_path)
             resp = requests_client.get()
         else:
-            resp = self.tapis3_client.actors.listNonces(**self.config)
+            resp = self.tapis3_client.actors.list_nonces(**self.config)
 
         filt_resp = self.filter_tapis_results(resp, parsed_args)
         headers = self.headers_from_result(filt_resp)

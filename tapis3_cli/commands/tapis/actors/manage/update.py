@@ -16,7 +16,7 @@ class ActorsUpdate(ActorsManage):
 
         # TapisResult
         self.load_client(parsed_args)
-        resp = self.tapis3_client.actors.updateActor(actor_id=actor_id, **config)
+        resp = self.tapis3_client.actors.update_actor(actor_id=actor_id, **config)
 
         # This is the singular form for handling ONE TapisResult
         filt_resp = self.filter_record_dict(resp.__dict__, parsed_args)

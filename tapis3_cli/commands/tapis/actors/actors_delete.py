@@ -19,5 +19,5 @@ class ActorsDelete(Oauth2Common, StringIdentifier):
         self.load_client(parsed_args)
         self.config = {}
         self.config["actor_id"] = parsed_args.actor_id
-        resp = self.tapis3_client.actors.deleteActor(**self.config)
+        resp = self.tapis3_client.actors.delete_actor(**self.config)
         # No return since this is Oauth2Common

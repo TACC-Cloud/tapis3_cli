@@ -30,7 +30,9 @@ class ActorsExecsList(Oauth2FormatMany, StringIdentifier, LimitsArgs):
         # if self.get_offset(parsed_args) is not None:
         #     self.config['offset'] = self.get_offset(parsed_args)
 
-        resp = self.tapis3_client.actors.listExecutions(**self.config).get("executions")
+        resp = self.tapis3_client.actors.list_executions(**self.config).get(
+            "executions"
+        )
 
         filt_resp = self.filter_tapis_results(resp, parsed_args)
         headers = self.headers_from_result(filt_resp)

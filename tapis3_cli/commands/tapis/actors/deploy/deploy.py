@@ -419,14 +419,14 @@ class ActorsDeploy(Oauth2FormatMany, StringIdentifier, DockerPy, IniLoader):
                         document[bk] = parse_boolean(bkv)
 
                 if self.actor_id is None:
-                    resp = self.tapis3_client.actors.createActor(**document)
+                    resp = self.tapis3_client.actors.create_actor(**document)
                     # resp = self.tapis_client.actors.add(body=document)
                     actor_id = resp.get("id", None)
                     setattr(self, "actor_id", actor_id)
                     self.log_message(Stage.CREATE, "Created Actor {0}".format(actor_id))
 
                 else:
-                    resp = self.tapis3_client.actors.updateActor(
+                    resp = self.tapis3_client.actors.update_actor(
                         actor_id=self.actor_id, **document
                     )
                     actor_id = resp.get("id", None)

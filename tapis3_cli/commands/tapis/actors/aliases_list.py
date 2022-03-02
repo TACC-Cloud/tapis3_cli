@@ -21,7 +21,7 @@ class AliasesList(Oauth2FormatMany, LimitsArgs):
         # if self.get_offset(parsed_args) is not None:
         #     self.config['offset'] = self.get_offset(parsed_args)
 
-        resp = self.tapis3_client.actors.listAliases(**self.config)
+        resp = self.tapis3_client.actors.list_aliases(**self.config)
 
         filt_resp = self.filter_tapis_results(resp, parsed_args)
         headers = self.headers_from_result(filt_resp)

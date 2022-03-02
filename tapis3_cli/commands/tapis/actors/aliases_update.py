@@ -23,7 +23,7 @@ class AliasesUpdate(Oauth2FormatOne, StringIdentifier):
         self.config = {}
         self.config["alias"] = parsed_args.alias
         self.config["actorId"] = parsed_args.actor_id
-        resp = self.tapis3_client.actors.updateActorAlias(**self.config)
+        resp = self.tapis3_client.actors.update_actor_alias(**self.config)
 
         # This is the singular form for handling ONE TapisResult
         filt_resp = self.filter_tapis_result(resp, parsed_args)

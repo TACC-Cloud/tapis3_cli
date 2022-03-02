@@ -35,7 +35,7 @@ class NoncesDelete(Oauth2Common, StringIdentifier):
             requests_client.setup("actors", api_path=api_path)
             resp = requests_client.delete()
         else:
-            resp = self.tapis3_client.actors.deleteNonce(
+            resp = self.tapis3_client.actors.delete_nonce(
                 actor_id=actor_id, nonce_id=nonce_id
             )
 

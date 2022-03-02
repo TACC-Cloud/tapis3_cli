@@ -18,7 +18,7 @@ class ActorsShow(Oauth2FormatOne, StringIdentifier):
         super(ActorsShow, self).take_action(parsed_args)
         self.load_client(parsed_args)
         actor_id = parsed_args.actor_id
-        resp = self.tapis3_client.actors.getActor(actor_id=actor_id)
+        resp = self.tapis3_client.actors.get_actor(actor_id=actor_id)
         filt_resp = self.filter_tapis_result(resp, parsed_args)
         headers = [k for k in filt_resp.keys()]
         data = list(filt_resp.values())

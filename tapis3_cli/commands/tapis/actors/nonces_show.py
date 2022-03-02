@@ -37,7 +37,7 @@ class NoncesShow(Oauth2FormatOne, StringIdentifier):
             requests_client.setup("actors", api_path=api_path)
             resp = requests_client.get()
         else:
-            resp = self.tapis3_client.actors.getNonce(
+            resp = self.tapis3_client.actors.get_nonce(
                 actor_id=actor_id, nonce_id=nonce_id
             )
 

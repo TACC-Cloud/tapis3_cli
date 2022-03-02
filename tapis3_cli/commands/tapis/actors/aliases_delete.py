@@ -19,5 +19,5 @@ class AliasesDelete(Oauth2Common, StringIdentifier):
         self.load_client(parsed_args)
         self.config = {}
         self.config["alias"] = parsed_args.alias
-        resp = self.tapis3_client.actors.deleteAlias(**self.config)
+        resp = self.tapis3_client.actors.delete_alias(**self.config)
         # No return since this is Oauth2Common

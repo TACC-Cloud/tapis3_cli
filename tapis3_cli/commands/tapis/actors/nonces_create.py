@@ -48,7 +48,7 @@ class NoncesCreate(Oauth2FormatOne, StringIdentifier):
             requests_client.setup("actors", api_path=api_path)
             resp = requests_client.post(data=body)
         else:
-            resp = self.tapis3_client.actors.createNonce(actor_id=actor_id, body=body)
+            resp = self.tapis3_client.actors.create_nonce(actor_id=actor_id, body=body)
 
         # This is the singular form for handling ONE TapisResult
 

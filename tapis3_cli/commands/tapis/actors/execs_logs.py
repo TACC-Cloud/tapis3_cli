@@ -31,7 +31,7 @@ class ActorsExecsLogs(Oauth2FormatOne, StringIdentifier):
         self.config = {}
         self.config["actor_id"] = parsed_args.actor_id
         self.config["execution_id"] = parsed_args.exec_id
-        resp = self.tapis3_client.actors.getExecutionLogs(**self.config)
+        resp = self.tapis3_client.actors.get_execution_logs(**self.config)
         logs_result = resp.get("logs")
         print("Logs for execution", self.config["execution_id"], "\n", logs_result)
         sys.exit(0)
