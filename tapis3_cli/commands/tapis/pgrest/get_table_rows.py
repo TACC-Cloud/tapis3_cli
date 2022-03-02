@@ -19,8 +19,8 @@ class RowsList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
 
         self.load_client(parsed_args)
         root_url = self.get_identifier(parsed_args, "root_url")
-        resp = self.tapis3_client.pgrest.get_table(
-            collection=root_url, limit=parsed_args.limit, offset=parsed_args.offset
+        resp = self.tapis3_client.pgrest.get_table_rows(
+            root_url=root_url, limit=parsed_args.limit, offset=parsed_args.offset
         )
         filt_resp = self.filter_tapis_results(resp, parsed_args)
 

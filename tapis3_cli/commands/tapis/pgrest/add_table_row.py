@@ -29,7 +29,7 @@ class RowsCreate(Oauth2FormatOne, JSONArg, StringIdentifier):
         root_url = self.get_identifier(parsed_args, "root_url")
         data = self.get_file_data(parsed_args, destination="json_arg")
 
-        resp = self.tapis3_client.pgrest.add_table_row(collection=root_url, data=data)
+        resp = self.tapis3_client.pgrest.add_table_row(root_url=root_url, data=data)
 
         # NOTE: get_in_collection returns a list - grab first and only item
         filt_resp = self.filter_tapis_result(resp[0], parsed_args)

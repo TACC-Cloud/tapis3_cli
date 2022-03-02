@@ -36,7 +36,7 @@ class RowsUpdate(Oauth2FormatOne, JSONArg, StringIdentifier):
         update = {"data": data}
 
         resp = self.tapis3_client.pgrest.update_table_row(
-            collection=root_url, item=pkid, request_body=update
+            root_url=root_url, item=pkid, request_body=update
         )
 
         # NOTE: update_in_collection returns a list - grab first and only item

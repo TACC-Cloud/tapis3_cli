@@ -6,7 +6,7 @@ from .delete_table_row import RowsDelete
 from .delete_view import ViewsDelete
 from .get_manage_table import TablesShow
 from .get_manage_view import ViewsShow
-from .get_table import RowsList
+from .get_table_rows import RowsList
 from .get_table_row import RowsShow
 from .get_view import ViewsRowsList
 from .list_tables import TablesList

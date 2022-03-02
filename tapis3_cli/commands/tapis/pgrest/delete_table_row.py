@@ -31,6 +31,6 @@ class RowsDelete(Oauth2Common, StringIdentifier):
         pkids = self.get_identifier(parsed_args, "_pkid")
         for keyid in pkids:
             resp = self.tapis3_client.pgrest.delete_table_row(
-                collection=root_url, item=keyid
+                root_url=root_url, item=keyid
             )
             print(resp.get("message", None))

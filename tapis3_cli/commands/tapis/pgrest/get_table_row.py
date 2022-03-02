@@ -25,7 +25,7 @@ class RowsShow(Oauth2FormatOne, StringIdentifier):
         root_url = self.get_identifier(parsed_args, "root_url")
         pkid = self.get_identifier(parsed_args, "_pkid")
 
-        resp = self.tapis3_client.pgrest.get_table_row(collection=root_url, item=pkid)
+        resp = self.tapis3_client.pgrest.get_table_row(root_url=root_url, item=pkid)
 
         # NOTE: get_in_collection returns a list - grab first and only item
         filt_resp = self.filter_tapis_result(resp[0], parsed_args)
