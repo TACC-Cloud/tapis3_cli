@@ -7,7 +7,14 @@ from ..client import Oauth2FormatMany
 class NoncesList(Oauth2FormatMany, LimitsArgs, StringIdentifier):
     """List Nonces for an Actor."""
 
-    DISPLAY_FIELDS = ["actorId", "id", "lastUseTime", "level", "remainingUses", "owner"]
+    DISPLAY_FIELDS = [
+        "actor_id",
+        "id",
+        "lastUseTime",
+        "level",
+        "remainingUses",
+        "owner",
+    ]
 
     def get_parser(self, prog_name):
         parser = super(NoncesList, self).get_parser(prog_name)

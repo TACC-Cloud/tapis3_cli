@@ -39,7 +39,7 @@ class ActorsManage(Oauth2FormatOne, StringIdentifier):
                 help="Docker Repo",
             )
 
-        # Only accept actorId on update
+        # Only accept actor_id on update
         if not self.CREATE_ONLY:
             parser = super().add_identifier(
                 parser, name="Actor ID", destination="actor_id", optional=False

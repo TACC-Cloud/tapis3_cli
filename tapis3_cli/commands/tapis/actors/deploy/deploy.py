@@ -207,13 +207,13 @@ class ActorsDeploy(Oauth2FormatMany, StringIdentifier, DockerPy, IniLoader):
         self.dockerfile = self.get_dockerfile()
         self.log_message(Stage.CONFIG, "Dockerfile: {0}".format(self.dockerfile))
 
-        # Accept actorId from CLI first then from cache
+        # Accept actor_id from CLI first then from cache
         # WARNING: Can still be None if no identifier can be resolved
         if parsed_args.actor_id is not None:
             self.actor_id = parsed_args.actor_id
         else:
             self.actor_id = actorid.read_id()
-        self.log_message(Stage.CONFIG, "actorId: {0}".format(self.actor_id))
+        self.log_message(Stage.CONFIG, "actor_id: {0}".format(self.actor_id))
 
         # Read in environment vars from secrets.json
         try:
@@ -433,7 +433,7 @@ class ActorsDeploy(Oauth2FormatMany, StringIdentifier, DockerPy, IniLoader):
                     setattr(self, "actor_id", actor_id)
                     self.log_message(Stage.CREATE, "Updated Actor {0}".format(actor_id))
                     # resp = self.tapis_client.actors.update(
-                    #     actorId=self.actor_id, body=document)
+                    #     actor_id=self.actor_id, body=document)
 
             except Exception as exc:
                 if self.ignore_errors:
@@ -446,5 +446,5 @@ class ActorsDeploy(Oauth2FormatMany, StringIdentifier, DockerPy, IniLoader):
         """Cache the actor identifier"""
         if self.docache:
             actorid.write_id(self.actor_id)
-            self.log_message(Stage.CREATE, "Cached actorId to disk")
+            self.log_message(Stage.CREATE, "Cached actor_id to disk")
         return True

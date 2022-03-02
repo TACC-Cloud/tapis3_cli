@@ -22,7 +22,7 @@ class AliasesCreate(Oauth2FormatOne, StringIdentifier):
         self.load_client(parsed_args)
         self.config = {}
         self.config["alias"] = parsed_args.alias
-        self.config["actorId"] = parsed_args.actor_id
+        self.config["actor_id"] = parsed_args.actor_id
         resp = self.tapis3_client.actors.create_alias(**self.config)
 
         filt_resp = self.filter_tapis_result(resp, parsed_args)

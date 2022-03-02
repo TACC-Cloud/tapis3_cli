@@ -56,7 +56,7 @@ Nonces
 
 Generate and manage Nonces, which are a kind of API key for 
 Actors that allow them to be used without authenticating to the 
-Tapis platform. Nonces can be issued against individual actorIds 
+Tapis platform. Nonces can be issued against individual actor_ids 
 but can also be issued for aliases. The ``-A`` option must be 
 passed to specify that the Actor identifier is an alias.
 

@@ -13,7 +13,7 @@ class ActorsMessage(Oauth2FormatOne, StringIdentifier):
     """Base class for messaging an Actor"""
 
     SYNCHRONOUS_EXECUTION = False
-    DISPLAY_FIELDS = ["executionId"]
+    DISPLAY_FIELDS = ["execution_id"]
 
     def get_parser(self, prog_name):
         parser = super(ActorsMessage, self).get_parser(prog_name)

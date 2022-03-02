@@ -41,15 +41,15 @@ def get_cachefile(filename=None):
 
 
 def validate(actor_id, permissive=True):
-    """Validate actorId"""
+    """Validate actor_id"""
     # TODO - validate against Abaco hashid
     try:
         if not isinstance(actor_id, str):
             raise TypeError("Actor ID must be a <str>")
         if len(actor_id) > 14 or len(actor_id) < 13:
-            raise ValueError("Invalid actorId")
+            raise ValueError("Invalid actor_id")
         if actor_id.isalnum() is False:
-            raise ValueError("Invalid actorId")
+            raise ValueError("Invalid actor_id")
         return True
     except Exception:
         if permissive:
