@@ -389,7 +389,7 @@ class ActorsDeploy(Oauth2FormatMany, StringIdentifier, DockerPy, IniLoader):
                 # of variables from project.ini[environment] and secrets.json
                 # document['defaultEnvironment'] = self.envs
                 union_envs = {**self.config["environment"], **self.envs}
-                document["defaultEnvironment"] = union_envs
+                document["default_environment"] = union_envs
 
                 # Configure Abaco cron from project.ini
                 cron_schedule = document.pop("cron_schedule", None)
