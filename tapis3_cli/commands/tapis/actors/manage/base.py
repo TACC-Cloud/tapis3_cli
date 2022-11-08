@@ -243,7 +243,7 @@ class ActorsManage(Oauth2FormatOne, StringIdentifier):
             config["hints"] = hints
 
         # Environment defaultEnvironment
-        config["defaultEnvironment"] = self.get_envs(parsed_args)
+        config["default_environment"] = self.get_envs(parsed_args)
 
         # Link
         if parsed_args.link is not None:
